@@ -9,7 +9,9 @@
 
 This project is a culmination of Sprints 1 through Sprint 3 of TripleTen. With the given Figma archive, the necessary specifications and images were incorporated and matched to accomodate popular display sizes for mobile devices, tablets, and desktops. Additional breakpoints were included to accomodate the change in displayed card elements.
 
-The link to the Figma project is included below:
+The links to the project and the Figma are included below:
+
+-[Click here for the webpage](https://ttruedell.github.io/se_project_aroundtheus/)
 
 - [Click here for Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)
 
