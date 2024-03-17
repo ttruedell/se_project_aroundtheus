@@ -1,0 +1,22 @@
+.header {
+  box-sizing: border-box;
+  border-bottom: 1px #545454 solid;
+  display: grid;
+  margin-top: 45px;
+  margin-bottom: 40px;
+}
+
+.header__logo {
+  padding-bottom: 41px;
+}
+
+@media screen and (max-width: 680px) {
+  .header {
+    margin-top: 28px;
+    margin-bottom: 42px;
+  }
+
+  .header__logo {
+    padding-left: 27px;
+  }
+}
