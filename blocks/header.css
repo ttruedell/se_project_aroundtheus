@@ -1,6 +1,6 @@
 .header {
   box-sizing: border-box;
-  border-bottom: 1px #545454 solid;
+  border-bottom: 1px rgba(84, 84, 84, 0.7) solid;
   display: grid;
   margin-top: 45px;
   margin-bottom: 40px;

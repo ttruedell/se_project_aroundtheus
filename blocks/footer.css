@@ -2,7 +2,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 67px 0px 60px 0px;
+  padding: 67px 0 60px 0px;
 }
 
 .footer__copyright {
@@ -17,18 +17,11 @@
 
 @media screen and (max-width: 680px) {
   .footer {
-    padding: 48px auto 36px 19px;
-    font-family: Inter;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 17px;
-    letter-spacing: 0em;
-    text-align: left;
+    padding: 48px 0px 36px 19px;
   }
-}
 
-@media screen and (max-width: 617px) {
-  .footer {
-    padding-left: 19px;
+  .footer__copyright {
+    font-size: 14px;
+    line-height: 17px;
   }
 }

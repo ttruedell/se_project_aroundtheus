@@ -14,7 +14,14 @@
     <div class="page">
       <header class="header">
         <a href="#" class="logo header__logo"
-          ><img src="./images/logo-vector.png" alt="About-the-US-logo"
+          ><img
+            class="logo logo_large"
+            src="./images/logo-vector.svg"
+            alt="About-the-US-logo" />
+          <img
+            class="logo logo_mobile"
+            src="./images/logo-vector-mobile.svg"
+            alt="About-the-US-logo-mobile"
         /></a>
       </header>
       <main class="content">
@@ -25,64 +32,88 @@
             alt="avatar-image"
           />
           <div class="profile__info">
-            <h1 class="profile__info_heading">Jacques Cousteau</h1>
-            <button class="profile__info_edit_button" type="button"></button>
-            <span class="profile__info_subheading">Explorer</span>
+            <h1 class="profile__heading">Jacques Cousteau</h1>
+            <button class="profile__edit-button" type="button"></button>
+            <p class="profile__subheading">Explorer</p>
           </div>
-          <button class="profile__info_add_button" type="button"></button>
+          <button class="profile__add-button" type="button"></button>
         </section>
         <section class="cards">
-          <div class="card">
-            <div class="card__image card__image_type_yosmite"></div>
-            <span class="card__content">
-              <div class="card__text">Yosmite Valley</div>
-              <button class="card__like-button" type="button"></button>
-            </span>
-          </div>
-
-          <div class="card">
-            <div class="card__image card__image_type_louise"></div>
+          <article class="card">
+            <img
+              class="card__image card__image_type_yosmite"
+              src="./images/yosemite.jpg"
+              alt="Yosmite-photo"
+            />
             <div class="card__content">
-              <span class="card__text">Lake Louise</span>
+              <h2 class="card__text">Yosmite Valley</h2>
               <button class="card__like-button" type="button"></button>
             </div>
-          </div>
+          </article>
 
-          <div class="card">
-            <div class="card__image card__image_type_bald_mts"></div>
+          <article class="card">
+            <img
+              class="card__image card__image_type_louise"
+              src="./images/lake-louise.jpg"
+              alt="Lake-Louise-photo"
+            />
             <div class="card__content">
-              <span class="card__text">Bald Mountains</span>
+              <h2 class="card__text">Lake Louise</h2>
               <button class="card__like-button" type="button"></button>
             </div>
-          </div>
+          </article>
 
-          <div class="card">
-            <div class="card__image card__image_type_latemar"></div>
+          <article class="card">
+            <img
+              class="card__image card__image_type_bald_mts"
+              src="./images/bald-mountains.jpg"
+              alt="Bald-Mountains-photo"
+            />
             <div class="card__content">
-              <span class="card__text">Latemar</span>
+              <h2 class="card__text">Bald Mountains</h2>
               <button class="card__like-button" type="button"></button>
             </div>
-          </div>
+          </article>
 
-          <div class="card">
-            <div class="card__image card__image_type_vanoise"></div>
+          <article class="card">
+            <img
+              class="card__image card__image_type_latemar"
+              src="./images/latemar.jpg"
+              alt="Latemar-photo"
+            />
             <div class="card__content">
-              <span class="card__text">Vanoise National Park</span>
+              <h2 class="card__text">Latemar</h2>
               <button class="card__like-button" type="button"></button>
             </div>
-          </div>
+          </article>
 
-          <div class="card">
-            <div class="card__image card__image_type_lago"></div>
+          <article class="card">
+            <img
+              class="card__image card__image_type_vanoise"
+              src="./images/vanoise.jpg"
+              alt="Vanoise-National-Park-photo"
+            />
             <div class="card__content">
-              <span class="card__text">Lago di Braies</span>
+              <h2 class="card__text">Vanoise National Park</h2>
               <button class="card__like-button" type="button"></button>
             </div>
-          </div>
+          </article>
+
+          <article class="card">
+            <img
+              class="card__image card__image_type_lago"
+              src="./images/lago.jpg"
+              alt="Lago-di-Braies-photo"
+            />
+            <div class="card__content">
+              <h2 class="card__text">Lago di Braies</h2>
+              <button class="card__like-button" type="button"></button>
+            </div>
+          </article>
         </section>
       </main>
       <footer class="footer">
-        <span class="footer__copyright">@ 2022 Around The U.S.</span>
+        <p class="footer__copyright">@ 2022 Around The U.S.</p>
       </footer>
     </div>
   </body>

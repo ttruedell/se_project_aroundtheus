@@ -25,7 +25,7 @@
   grid-area: profile-info;
 }
 
-.profile__info_heading {
+.profile__heading {
   margin: 0;
   grid-area: heading;
   font-family: "Inter", sans-serif;
@@ -41,24 +41,24 @@
   overflow: hidden;
 }
 
-.profile__info_edit_button {
+.profile__edit-button {
   grid-area: edit-button;
   background-color: transparent;
-  background-image: url(../images/Edit-Button.png);
+  background-image: url(../images/edit-vector.svg);
   background-repeat: no-repeat;
   background-position: center center;
   width: 25px;
   height: 25px;
-  border: 1px #fff;
+  border: 1px #fff solid;
   transition: opacity ease-in-out 0.15s 0.15s;
 }
 
-.profile__info_edit_button:hover {
+.profile__edit-button:hover {
   opacity: 60%;
   cursor: pointer;
 }
 
-.profile__info_subheading {
+.profile__subheading {
   margin: 0;
   grid-area: subheading;
   font-family: "Inter", sans-serif;
@@ -74,7 +74,7 @@
   overflow: hidden;
 }
 
-.profile__info_add_button {
+.profile__add-button {
   background: transparent url(../images/add-button.svg) center no-repeat;
   height: 50px;
   width: 150px;
@@ -84,18 +84,16 @@
   transition: opacity ease-in-out 0.15s 0.15s;
 }
 
-.profile__info_add_button:hover {
+.profile__add-button:hover {
   opacity: 60%;
   cursor: pointer;
 }
 
 @media screen and (max-width: 916px) {
-  .profile__info_heading {
-    font-family: "Inter", sans-serif;
+  .profile__heading {
     font-size: 22px;
     font-weight: 500;
     line-height: 27px;
-    letter-spacing: 0em;
     text-align: center;
     max-width: 400px;
     text-overflow: ellipsis;
@@ -103,19 +101,16 @@
     overflow: hidden;
   }
 
-  .profile__info_edit_button {
+  .profile__edit-button {
     padding: 1px;
     transform: scale(0.75);
     margin-right: 50px;
   }
 
-  .profile__info_subheading {
+  .profile__subheading {
     justify-self: flex-start;
-    font-family: "Inter", sans-serif;
     font-size: 14px;
-    font-weight: 400;
     line-height: 17px;
-    letter-spacing: 0em;
     text-align: center;
     max-width: 400px;
     text-overflow: ellipsis;
@@ -147,39 +142,23 @@
     padding: 0;
   }
 
-  .profile__info_heading {
-    font-family: "Inter", sans-serif;
-    font-size: 22px;
-    font-weight: 500;
-    line-height: 27px;
-    letter-spacing: 0em;
-    text-align: center;
+  .profile__heading {
     max-width: 200px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
   }
 
-  .profile__info_edit_button {
+  .profile__edit-button {
     margin: 0;
+    height: 16px;
+    width: 16px;
   }
 
-  .profile__info_subheading {
+  .profile__subheading {
     justify-self: center;
     padding: 0 30px;
-    font-family: "Inter", sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 17px;
-    letter-spacing: 0em;
-    text-align: center;
-    max-width: 400px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+    max-width: 200px;
   }
 
-  .profile__info_add_button {
+  .profile__add-button {
     margin: 36px auto;
     display: grid;
 
@@ -190,7 +169,7 @@
 }
 
 @media screen and (max-width: 617px) {
-  .profile__info_add_button {
+  .profile__add-button {
     max-width: 282px;
   }
 }

@@ -1,46 +1,19 @@
 .card {
   border-radius: 10px;
-  height: 361px;
   background-color: #fff;
 }
 
 .card__image {
   border-radius: 10px 10px 0px 0px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
   height: 282px;
-}
-
-.card__image_type_yosmite {
-  background-image: url(../images/yosemite.jpg);
-}
-
-.card__image_type_louise {
-  background-image: url(../images/lake-louise.jpg);
-}
-
-.card__image_type_bald_mts {
-  background-image: url(../images/bald-mountains.jpg);
-}
-
-.card__image_type_latemar {
-  background-image: url(../images/latemar.jpg);
-}
-
-.card__image_type_vanoise {
-  background-image: url(../images/vanoise.jpg);
-}
-
-.card__image_type_lago {
-  background-image: url(../images/lago.jpg);
+  width: 282px;
 }
 
 .card__content {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 25px 30px 25px 20px;
+  padding: 0px 30px 0px 20px;
 }
 
 .card__text {
@@ -67,6 +40,6 @@
 }
 
 .card__like-button:hover {
-  opacity: 60%;
+  opacity: 50%;
   cursor: pointer;
 }
