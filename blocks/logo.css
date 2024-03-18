@@ -3,21 +3,9 @@
   height: 33px;
 }
 
-.logo_type_mobile {
-  display: none;
-}
-
 @media screen and (max-width: 680px) {
   .logo {
     width: 126px;
     height: 24px;
-  }
-
-  .logo_large {
-    display: none;
-  }
-
-  .logo_mobile {
-    display: block;
   }
 }
