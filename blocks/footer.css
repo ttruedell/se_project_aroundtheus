@@ -13,6 +13,7 @@
   letter-spacing: 0em;
   text-align: left;
   color: #545454;
+  margin: 0;
 }
 
 @media screen and (max-width: 680px) {

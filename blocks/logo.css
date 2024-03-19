@@ -1,15 +1,12 @@
-.logo {
+.logo__vector {
   width: 173px;
   height: 33px;
-}
-
-.logo__vector {
   background-image: url(../images/logo-vector.svg);
-  background-size: contain;
+  background-size: cover;
 }
 
 @media screen and (max-width: 680px) {
-  .logo {
+  .logo__vector {
     width: 126px;
     height: 24px;
   }
