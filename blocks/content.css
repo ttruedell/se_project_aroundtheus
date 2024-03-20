@@ -2,3 +2,10 @@
   display: grid;
   grid-template-columns: minmax(min-content, 880px);
 }
+
+@media screen and (max-width: 617px) {
+  .content {
+    max-width: 282px;
+    justify-self: center;
+  }
+}

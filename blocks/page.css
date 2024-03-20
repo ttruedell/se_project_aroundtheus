@@ -4,7 +4,7 @@
   grid-template-columns: minmax(min-content, 880px);
   justify-content: center;
   align-items: center;
-  padding: 0px 10px;
+  padding: 45px 10px 0px 10px;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
@@ -22,6 +22,6 @@
 @media screen and (max-width: 617px) {
   .page {
     grid-template-columns: minmax(min-content, 320px);
-    padding: 0;
+    padding: 28px 0 0 0;
   }
 }

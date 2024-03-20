@@ -2,7 +2,7 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  padding-bottom: 51px;
+  padding: 40px 0 51px 0;
 }
 
 .profile__avatar {
@@ -98,9 +98,8 @@
   }
 
   .profile__edit-button {
-    height: 16px;
-    width: 16px;
-    margin-right: 50px;
+    height: 18px;
+    width: 18px;
   }
 
   .profile__subheading {
@@ -108,7 +107,7 @@
     font-size: 14px;
     line-height: 17px;
     text-align: center;
-    max-width: 400px;
+    max-width: 200px;
   }
 }
 
@@ -121,7 +120,7 @@
       "add-button";
     justify-content: center;
     align-items: center;
-    padding-bottom: 0;
+    padding: 42px 0 0 0;
   }
 
   .profile__avatar {
@@ -132,21 +131,15 @@
   .profile__info {
     justify-content: center;
     grid-gap: 14px 10px;
-    padding: 0;
   }
 
   .profile__heading {
     max-width: 200px;
   }
 
-  .profile__edit-button {
-    margin: 0;
-  }
-
   .profile__subheading {
     justify-self: center;
-    padding: 0 30px;
-    max-width: 200px;
+    max-width: 150px;
   }
 
   .profile__add-button {
