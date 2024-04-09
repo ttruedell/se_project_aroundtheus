@@ -1,31 +1,31 @@
 let initialCards = [
   {
-    text: "Yosmite Valley",
+    name: "Yosmite Valley",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
   },
 
   {
-    text: "Lake Louise",
+    name: "Lake Louise",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
   },
 
   {
-    text: "Bald Mountains",
+    name: "Bald Mountains",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
   },
 
   {
-    text: "Latemar",
+    name: "Latemar",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
   },
 
   {
-    text: "Vanoise National Park",
+    name: "Vanoise National Park",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
   },
 
   {
-    text: "Lago di Braies",
+    name: "Lago di Braies",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
@@ -58,9 +58,9 @@ function getCardElement(cardData) {
   //set the path to the image to the link field of the object
   cardImageElement.src = cardData.link;
   //set the image alt text to the name field of the object
-  cardImageElement.alt = cardData.text;
+  cardImageElement.alt = cardData.name;
   //set the card title to the name field of the object, too
-  cardTextElement.textContent = cardData.text;
+  cardTextElement.textContent = cardData.name;
   //return the ready HTML element with the filled-in data
   return cardElement;
 }
