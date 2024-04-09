@@ -25,85 +25,13 @@
             alt="avatar-image"
           />
           <div class="profile__info">
-            <h1 class="profile__heading">Jacques Cousteau</h1>
+            <h1 class="profile__name">Jacques Cousteau</h1>
             <button class="profile__edit-button" type="button"></button>
-            <p class="profile__subheading">Explorer</p>
+            <p class="profile__description">Explorer</p>
           </div>
           <button class="profile__add-button" type="button"></button>
         </section>
-        <section class="cards">
-          <article class="card">
-            <img
-              class="card__image"
-              src="./images/yosemite.jpg"
-              alt="Yosmite-photo"
-            />
-            <div class="card__content">
-              <h2 class="card__text">Yosmite Valley</h2>
-              <button class="card__like-button" type="button"></button>
-            </div>
-          </article>
-
-          <article class="card">
-            <img
-              class="card__image"
-              src="./images/lake-louise.jpg"
-              alt="Lake-Louise-photo"
-            />
-            <div class="card__content">
-              <h2 class="card__text">Lake Louise</h2>
-              <button class="card__like-button" type="button"></button>
-            </div>
-          </article>
-
-          <article class="card">
-            <img
-              class="card__image"
-              src="./images/bald-mountains.jpg"
-              alt="Bald-Mountains-photo"
-            />
-            <div class="card__content">
-              <h2 class="card__text">Bald Mountains</h2>
-              <button class="card__like-button" type="button"></button>
-            </div>
-          </article>
-
-          <article class="card">
-            <img
-              class="card__image"
-              src="./images/latemar.jpg"
-              alt="Latemar-photo"
-            />
-            <div class="card__content">
-              <h2 class="card__text">Latemar</h2>
-              <button class="card__like-button" type="button"></button>
-            </div>
-          </article>
-
-          <article class="card">
-            <img
-              class="card__image"
-              src="./images/vanoise.jpg"
-              alt="Vanoise-National-Park-photo"
-            />
-            <div class="card__content">
-              <h2 class="card__text">Vanoise National Park</h2>
-              <button class="card__like-button" type="button"></button>
-            </div>
-          </article>
-
-          <article class="card">
-            <img
-              class="card__image"
-              src="./images/lago.jpg"
-              alt="Lago-di-Braies-photo"
-            />
-            <div class="card__content">
-              <h2 class="card__text">Lago di Braies</h2>
-              <button class="card__like-button" type="button"></button>
-            </div>
-          </article>
-        </section>
+        <section class="cards"></section>
       </main>
       <footer class="footer">
         <p class="footer__copyright">@ 2022 Around The U.S.</p>
@@ -117,20 +45,32 @@
         <form class="modal__form">
           <input
             class="modal__input"
+            id="profile-name-input"
             type="text"
-            name="heading"
+            name="name"
             placeholder="Name"
           />
           <input
             class="modal__input"
+            id="profile-description-input"
             type="text"
-            name="subheading"
-            placeholder="description"
+            name="description"
+            placeholder="Description"
           />
           <button class="modal__button">Save</button>
         </form>
       </div>
     </div>
+
+    <template id="card-template">
+      <article class="card">
+        <img class="card__image" src="" alt="" />
+        <div class="card__content">
+          <h2 class="card__text"></h2>
+          <button class="card__like-button" type="button"></button>
+        </div>
+      </article>
+    </template>
 
     <script src="./scripts/index.js"></script>
   </body>

@@ -23,7 +23,7 @@
   grid-area: profile-info;
 }
 
-.profile__heading {
+.profile__name {
   margin: 0;
   grid-area: heading;
   font-family: "Inter", sans-serif;
@@ -57,7 +57,7 @@
   cursor: pointer;
 }
 
-.profile__subheading {
+.profile__description {
   margin: 0;
   grid-area: subheading;
   font-family: "Inter", sans-serif;
@@ -90,7 +90,7 @@
 }
 
 @media screen and (max-width: 916px) {
-  .profile__heading {
+  .profile__name {
     font-size: 22px;
     line-height: 27px;
     text-align: center;
@@ -102,7 +102,7 @@
     width: 18px;
   }
 
-  .profile__subheading {
+  .profile__description {
     justify-self: flex-start;
     font-size: 14px;
     line-height: 17px;
@@ -133,11 +133,11 @@
     grid-gap: 14px 10px;
   }
 
-  .profile__heading {
+  .profile__name {
     max-width: 200px;
   }
 
-  .profile__subheading {
+  .profile__description {
     justify-self: center;
     max-width: 150px;
   }
