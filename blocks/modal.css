@@ -78,26 +78,6 @@
   max-height: 75vh;
 }
 
-.modal__preview-close {
-  position: absolute;
-  height: 40px;
-  width: 40px;
-  padding: 0;
-  background-image: url(../images/close-icon.svg);
-  border: none;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-color: transparent;
-  bottom: calc(100% + 5px);
-  left: calc(100% + 5px);
-  cursor: pointer;
-  transition: opacity ease-in-out 0.2s 0.2s;
-}
-
-.modal__preview-close:hover {
-  opacity: 60%;
-}
-
 .modal__preview-title {
   margin: 0;
   padding: 10px 0 0 0;

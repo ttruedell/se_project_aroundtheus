@@ -1,4 +1,4 @@
-let initialCards = [
+const initialCards = [
   {
     name: "Yosmite Valley",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
@@ -49,12 +49,13 @@ const cardsElement = document.querySelector(".cards");
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 
-const addCardForm = addCardModal.querySelector("#add-card-form");
-const cardTitleInput = addCardForm.querySelector(".modal__input_type_title");
-const cardUrlInput = addCardForm.querySelector(".modal__input_type_url");
+const cardForm = addCardModal.querySelector("#add-card-form");
+const cardTitleInput = cardForm.querySelector(".modal__input_type_title");
+const cardUrlInput = cardForm.querySelector(".modal__input_type_url");
 
 //Elements: Image Preview Modal
 const imagePreviewModal = document.querySelector("#image-preview-modal");
+const previewImage = imagePreviewModal.querySelector(".modal__preview-image");
 const imagePreviewModalCloseButton = imagePreviewModal.querySelector(
   ".modal__preview-close"
 );
@@ -92,9 +93,6 @@ function getCardElement(cardData) {
   });
 
   cardImageElement.addEventListener("click", () => {
-    const previewImage = imagePreviewModal.querySelector(
-      ".modal__preview-image"
-    );
     previewImage.src = cardData.link;
     previewImage.alt = cardData.name;
     imagePreviewModalTitle.textContent = cardData.name;
@@ -124,6 +122,7 @@ function handleAddCardSubmit(event) {
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   renderCard({ name, link }, cardsElement);
+  cardForm.reset();
   closeModal(addCardModal);
 }
 
@@ -140,7 +139,7 @@ profileModalCloseButton.addEventListener("click", () =>
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
-addCardForm.addEventListener("submit", handleAddCardSubmit);
+cardForm.addEventListener("submit", handleAddCardSubmit);
 
 addNewCardButton.addEventListener("click", () => openModal(addCardModal));
 
