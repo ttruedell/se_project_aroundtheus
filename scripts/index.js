@@ -29,7 +29,7 @@ let initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
-//Elements//
+//Elements: Edit Profile Modal//
 const profileEditButton = document.querySelector(".profile__edit-button");
 const editProfileModal = document.querySelector("#edit-profile-modal");
 const profileModalCloseButton = editProfileModal.querySelector(".modal__close");
@@ -41,6 +41,7 @@ const profileDescriptionInput = document.querySelector(
 );
 const profileEditForm = editProfileModal.querySelector("#edit-profile-form");
 
+// Elements: Add Card Modal
 const addNewCardButton = document.querySelector(".profile__add-button");
 const addCardModal = document.querySelector("#add-card-modal");
 const addCardModalCloseButton = addCardModal.querySelector(".modal__close");
@@ -51,6 +52,15 @@ const cardTemplate =
 const addCardForm = addCardModal.querySelector("#add-card-form");
 const cardTitleInput = addCardForm.querySelector(".modal__input_type_title");
 const cardUrlInput = addCardForm.querySelector(".modal__input_type_url");
+
+//Elements: Image Preview Modal
+const imagePreviewModal = document.querySelector("#image-preview-modal");
+const imagePreviewModalCloseButton = imagePreviewModal.querySelector(
+  ".modal__preview-close"
+);
+const imagePreviewModalTitle = imagePreviewModal.querySelector(
+  ".modal__preview-title"
+);
 
 //Functions//
 function closeModal(modal) {
@@ -67,18 +77,39 @@ function openModal(modal) {
 }
 
 function getCardElement(cardData) {
-  //clone the template element with all its content and store it in a cardElement variable
   const cardElement = cardTemplate.cloneNode(true);
-  //access the card title and image and store them in variables
   const cardImageElement = cardElement.querySelector(".card__image");
   const cardTextElement = cardElement.querySelector(".card__text");
-  //set the path to the image to the link field of the object
+  const likeButton = cardElement.querySelector(".card__like-button");
+  //find the delete button
+  const cardDeleteButton = cardElement.querySelector(".card__delete-button");
+  //add the event listener to thte delete button
+  cardDeleteButton.addEventListener("click", () => {
+    //cardElement.remove
+    cardElement.remove();
+  });
+  //add click listener to the card image element
+
+  //////////////
+
+  cardImageElement.addEventListener("click", () => {
+    const previewImage = imagePreviewModal.querySelector(
+      ".modal__preview-image"
+    );
+    previewImage.src = cardData.link;
+    previewImage.alt = cardData.name;
+    imagePreviewModalTitle.textContent = cardData.name;
+    openModal(imagePreviewModal);
+  });
+  //open modal with the preview-image modal (add to html) (14:00)
+
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__like-button_active");
+  });
+
   cardImageElement.src = cardData.link;
-  //set the image alt text to the name field of the object
   cardImageElement.alt = cardData.name;
-  //set the card title to the name field of the object, too
   cardTextElement.textContent = cardData.name;
-  //return the ready HTML element with the filled-in data
   return cardElement;
 }
 
@@ -119,4 +150,15 @@ addCardModalCloseButton.addEventListener("click", () =>
   closeModal(addCardModal)
 );
 
+imagePreviewModalCloseButton.addEventListener("click", () =>
+  closeModal(imagePreviewModal)
+);
+
 initialCards.forEach((cardData) => renderCard(cardData, cardsElement));
+
+/*const likeButtons = document.querySelectorAll(".card__like-button");
+likeButtons.forEach((likeButton) => {
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__like-button_active");
+  });
+}); */

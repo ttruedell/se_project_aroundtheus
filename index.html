@@ -81,13 +81,22 @@
             name="url"
             placeholder="Image URL"
           />
-          <button class="modal__button">Save</button>
+          <button class="modal__button">Create</button>
         </form>
       </div>
     </div>
-
+    <!-- Image Preview Modal-->
+    <div class="modal" id="image-preview-modal">
+      <div class="modal__preview-container">
+        <button class="modal__preview-close"></button>
+        <img class="modal__preview-image" src="" alt="" />
+        <p class="modal__preview-title"></p>
+      </div>
+    </div>
+    <!-- Card Template -->
     <template id="card-template">
       <article class="card">
+        <button class="card__delete-button" type="button"></button>
         <img class="card__image" src="" alt="" />
         <div class="card__content">
           <h2 class="card__text"></h2>

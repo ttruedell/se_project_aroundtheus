@@ -3,6 +3,26 @@
   background-color: #fff;
   height: 100%;
   line-height: 0;
+  position: relative;
+}
+
+.card__delete-button {
+  background-image: url(../images/trash-delete-icon.svg);
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  width: 18px;
+  height: 19px;
+  transition: opacity ease-in-out 0.15s 0.15s;
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  transition: opacity ease-in-out 0.15s 0.15s;
+}
+
+.card__delete-button:hover {
+  opacity: 60%;
+  cursor: pointer;
 }
 
 .card__image {
@@ -40,6 +60,10 @@
   height: 18px;
   width: 21px;
   transition: opacity ease-in-out 0.15s 0.15s;
+}
+
+.card__like-button_active {
+  background-image: url(../images/like-button-active.svg);
 }
 
 .card__like-button:hover {
