@@ -78,7 +78,7 @@ function closeModal(modal) {
   setTimeout(() => {
     modal.classList.remove("modal_opened");
     modal.classList.remove("modal_hide");
-  }, 280);
+  }, 200);
 }
 
 function renderCard(cardData, container) {
@@ -116,7 +116,7 @@ function getCardElement(cardData) {
 
 /////
 function isClickOutsideModalContainer(event, modal) {
-  const modalContainer = modal.querySelector("#modal-container");
+  const modalContainer = modal.querySelector(".modal__js-container");
   const modalRect = modalContainer.getBoundingClientRect();
   const clickX = event.clientX;
   const clickY = event.clientY;
@@ -138,7 +138,7 @@ function closeModalEscOrClickOutside() {
     }
   });
 
-  document.addEventListener("dblclick", (event) => {
+  document.addEventListener("mousedown", (event) => {
     modalElements.forEach(function (modal) {
       if (
         isClickOutsideModalContainer(event, modal) &&
