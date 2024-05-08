@@ -3,6 +3,7 @@
   background-color: #fff;
   line-height: 0;
   position: relative;
+  height: 361px;
 }
 
 .card__delete-button {
