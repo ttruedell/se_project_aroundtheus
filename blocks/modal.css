@@ -30,7 +30,7 @@
 
 .modal_opened {
   display: flex;
-  animation: fadeIn 0.3s ease-in-out;
+  animation: fadeIn 0.3s forwards;
 }
 
 .modal_hide {
@@ -119,6 +119,11 @@
   margin: 54px 0 0 0;
 }
 
+.modal__input_type_error {
+  border: 1px #f00;
+  border-style: none none solid none;
+}
+
 .modal__button {
   font-family: "Inter", sans-serif;
   font-size: 18px;
@@ -136,6 +141,19 @@
 
 .modal__button:hover {
   opacity: 80%;
+}
+
+.modal__button_disabled {
+  opacity: 20%;
+}
+
+.modal__error_visible {
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+  text-align: left;
+  color: #f00;
 }
 
 @media screen and (max-width: 630px) {

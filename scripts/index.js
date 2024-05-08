@@ -29,6 +29,7 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
+
 //Elements: Edit Profile Modal//
 const profileEditButton = document.querySelector(".profile__edit-button");
 const editProfileModal = document.querySelector("#edit-profile-modal");
@@ -63,7 +64,11 @@ const imagePreviewModalTitle = imagePreviewModal.querySelector(
   ".modal__preview-title"
 );
 
+///Element, select modals
+const modalElements = document.querySelectorAll(".modal");
+
 //Functions//
+
 function openModal(modal) {
   modal.classList.add("modal_opened");
 }
@@ -73,7 +78,7 @@ function closeModal(modal) {
   setTimeout(() => {
     modal.classList.remove("modal_opened");
     modal.classList.remove("modal_hide");
-  }, 200);
+  }, 280);
 }
 
 function renderCard(cardData, container) {
@@ -109,7 +114,44 @@ function getCardElement(cardData) {
   return cardElement;
 } // Function getCardElement (End)
 
+/////
+function isClickOutsideModalContainer(event, modal) {
+  const modalContainer = modal.querySelector("#modal-container");
+  const modalRect = modalContainer.getBoundingClientRect();
+  const clickX = event.clientX;
+  const clickY = event.clientY;
+
+  return (
+    clickX < modalRect.left ||
+    clickX > modalRect.right ||
+    clickY < modalRect.top ||
+    clickY > modalRect.bottom
+  );
+}
+//Function: Close Modal, Click Outside or Esc
+function closeModalEscOrClickOutside() {
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      modalElements.forEach(function (modal) {
+        closeModal(modal);
+      });
+    }
+  });
+
+  document.addEventListener("dblclick", (event) => {
+    modalElements.forEach(function (modal) {
+      if (
+        isClickOutsideModalContainer(event, modal) &&
+        modal.classList.contains("modal_opened")
+      ) {
+        closeModal(modal);
+      }
+    });
+  });
+}
+
 //Event Handlers//
+
 function handleProfileEditSubmit(event) {
   event.preventDefault();
   profileName.textContent = profileNameInput.value;
@@ -125,6 +167,8 @@ function handleAddCardSubmit(event) {
   cardForm.reset();
   closeModal(addCardModal);
 }
+
+/////
 
 //Event Listeners//
 profileEditButton.addEventListener("click", () => {
@@ -152,3 +196,8 @@ imagePreviewModalCloseButton.addEventListener("click", () =>
 );
 
 initialCards.forEach((cardData) => renderCard(cardData, cardsElement));
+
+////
+modalElements.forEach((event, modal) =>
+  closeModalEscOrClickOutside(event, modal)
+);
