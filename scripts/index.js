@@ -71,6 +71,8 @@ const modalElements = document.querySelectorAll(".modal");
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  addEscKeyListener();
+  addClickOutsideModalListener();
 }
 
 function closeModal(modal) {
@@ -80,6 +82,56 @@ function closeModal(modal) {
     modal.classList.remove("modal_hide");
   }, 200);
 }
+
+////////Function: Close Modal, Press Esc
+function addEscKeyListener() {
+  function handleEscKey(event) {
+    if (event.key === "Escape") {
+      modalElements.forEach(closeModal);
+    }
+  }
+
+  document.addEventListener("keydown", handleEscKey);
+
+  function removeEscListener() {
+    document.removeEventListener("keydown", handleEscKey);
+  }
+  return removeEscListener;
+}
+///////Function: Close Modal, Click Outside
+function addClickOutsideModalListener() {
+  function isClickOutsideModalContainer(event, modal) {
+    const modalContainer = modal.querySelector(".modal__js-container");
+    const modalRect = modalContainer.getBoundingClientRect();
+    const clickX = event.clientX;
+    const clickY = event.clientY;
+
+    return (
+      clickX < modalRect.left ||
+      clickX > modalRect.right ||
+      clickY < modalRect.top ||
+      clickY > modalRect.bottom
+    );
+  }
+
+  const handleClickOutsideModal = (event) => {
+    modalElements.forEach(function (modal) {
+      if (
+        isClickOutsideModalContainer(event, modal) &&
+        modal.classList.contains("modal_opened")
+      ) {
+        closeModal(modal);
+      }
+    });
+  };
+
+  document.addEventListener("mousedown", handleClickOutsideModal);
+
+  return function removeClickOutsideModalListener() {
+    document.removeEventListener("click", handleClickOutsideModal);
+  };
+}
+///////
 
 function renderCard(cardData, container) {
   const cardElement = getCardElement(cardData);
@@ -113,42 +165,6 @@ function getCardElement(cardData) {
   cardTextElement.textContent = cardData.name;
   return cardElement;
 } // Function getCardElement (End)
-
-/////
-function isClickOutsideModalContainer(event, modal) {
-  const modalContainer = modal.querySelector(".modal__js-container");
-  const modalRect = modalContainer.getBoundingClientRect();
-  const clickX = event.clientX;
-  const clickY = event.clientY;
-
-  return (
-    clickX < modalRect.left ||
-    clickX > modalRect.right ||
-    clickY < modalRect.top ||
-    clickY > modalRect.bottom
-  );
-}
-//Function: Close Modal, Click Outside or Esc
-function closeModalEscOrClickOutside() {
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      modalElements.forEach(function (modal) {
-        closeModal(modal);
-      });
-    }
-  });
-
-  document.addEventListener("mousedown", (event) => {
-    modalElements.forEach(function (modal) {
-      if (
-        isClickOutsideModalContainer(event, modal) &&
-        modal.classList.contains("modal_opened")
-      ) {
-        closeModal(modal);
-      }
-    });
-  });
-}
 
 //Event Handlers//
 
@@ -198,6 +214,4 @@ imagePreviewModalCloseButton.addEventListener("click", () =>
 initialCards.forEach((cardData) => renderCard(cardData, cardsElement));
 
 ////
-modalElements.forEach((event, modal) =>
-  closeModalEscOrClickOutside(event, modal)
-);
+modalElements.forEach((event, modal) => closeModalClickOutside(event, modal));
