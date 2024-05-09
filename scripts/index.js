@@ -128,7 +128,7 @@ function addClickOutsideModalListener() {
   document.addEventListener("mousedown", handleClickOutsideModal);
 
   return function removeClickOutsideModalListener() {
-    document.removeEventListener("click", handleClickOutsideModal);
+    document.removeEventListener("mousedown", handleClickOutsideModal);
   };
 }
 ///////
