@@ -212,6 +212,3 @@ imagePreviewModalCloseButton.addEventListener("click", () =>
 );
 
 initialCards.forEach((cardData) => renderCard(cardData, cardsElement));
-
-////
-modalElements.forEach((event, modal) => closeModalClickOutside(event, modal));
