@@ -70,7 +70,6 @@ const modalElements = document.querySelectorAll(".modal");
 //Functions//
 function openModal(modal) {
   modal.classList.add("modal_opened");
-  document.addEventListener("keydown", handleEscKey);
   addEscKeyListener();
   addClickOutsideModalListener();
 }
