@@ -68,11 +68,9 @@ const imagePreviewModalTitle = imagePreviewModal.querySelector(
 const modalElements = document.querySelectorAll(".modal");
 
 //Functions//
-const handleEscKey = addEscKeyListener();
-const handleClickOutsideModal = addClickOutsideModalListener();
-
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", handleEscKey);
   addEscKeyListener();
   addClickOutsideModalListener();
 }
@@ -83,69 +81,64 @@ function closeModal(modal) {
     modal.classList.remove("modal_opened");
     modal.classList.remove("modal_hide");
   }, 200);
-  removeEscKeyListener(handleEscKey);
-  removeClickOutsideModalListener(handleClickOutsideModal);
+  removeEscKeyListener();
+  removeClickOutsideModalListener();
 }
 
-////////Function: Close Modal, Press Esc (Start)
-//// Add Event Listener
+////////Functions: Close Modal, Press Esc (Start)
+function handleEscKey(event) {
+  modalElements.forEach(function (modal) {
+    if (event.key === "Escape" && modal.classList.contains("modal_opened")) {
+      closeModal(modal);
+    }
+  });
+}
 function addEscKeyListener() {
-  function handleEscKey(event) {
-    modalElements.forEach(function (modal) {
-      if (event.key === "Escape" && modal.classList.contains("modal_opened")) {
-        closeModal(modal);
-      }
-    });
-  }
-
   document.addEventListener("keydown", handleEscKey);
-
-  return handleEscKey; // Return the handleEscKey function
 }
-//// Remove Event Listener
-function removeEscKeyListener(handleEscKey) {
+
+function removeEscKeyListener() {
   document.removeEventListener("keydown", handleEscKey);
 }
-////////Function: Close Modal, Press Esc (End)
+////////Functions: Close Modal, Press Esc (End)
 
-///////Function: Close Modal, Click Outside (Start)
-//// Add Event Listener
-function addClickOutsideModalListener() {
-  function isClickOutsideModalContainer(event, modal) {
-    const modalContainer = modal.querySelector(".modal__js-container");
-    const modalRect = modalContainer.getBoundingClientRect();
-    const clickX = event.clientX;
-    const clickY = event.clientY;
+///////Functions: Close Modal, Click Outside (Start)
+function isClickOutsideModalContainer(event, modal) {
+  const modalContainer = modal.querySelector(".modal__js-container");
+  const modalRect = modalContainer.getBoundingClientRect();
+  const clickX = event.clientX;
+  const clickY = event.clientY;
 
-    return (
-      clickX < modalRect.left ||
-      clickX > modalRect.right ||
-      clickY < modalRect.top ||
-      clickY > modalRect.bottom
-    );
-  }
-
-  function handleClickOutsideModal(event) {
-    modalElements.forEach(function (modal) {
-      if (
-        isClickOutsideModalContainer(event, modal) &&
-        modal.classList.contains("modal_opened")
-      ) {
-        closeModal(modal);
-      }
-    });
-  }
-
-  document.addEventListener("mousedown", handleClickOutsideModal);
-
-  return handleClickOutsideModal;
+  return (
+    clickX < modalRect.left ||
+    clickX > modalRect.right ||
+    clickY < modalRect.top ||
+    clickY > modalRect.bottom
+  );
 }
-//// Remove Event Listener
-function removeClickOutsideModalListener(handleClickOutsideModal) {
+function handleClickOutsideModal(event) {
+  modalElements.forEach(function (modal) {
+    if (
+      isClickOutsideModalContainer(event, modal) &&
+      modal.classList.contains("modal_opened")
+    ) {
+      closeModal(modal);
+    }
+  });
+}
+
+function addClickOutsideModalListener() {
+  document.addEventListener("mousedown", handleClickOutsideModal);
+}
+
+function removeClickOutsideModalListener() {
   document.removeEventListener("mousedown", handleClickOutsideModal);
 }
-///////Function: Close Modal, Click Outside (End)
 
+///////Functions: Close Modal, Click Outside (End)
+//
+
+//Function: Render Card
 function renderCard(cardData, container) {
   const cardElement = getCardElement(cardData);
   container.prepend(cardElement);
