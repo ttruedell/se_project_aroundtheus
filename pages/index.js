@@ -1,3 +1,6 @@
+import Card from "../components/Card";
+
+////Constants//////
 const initialCards = [
   {
     name: "Yosmite Valley",
@@ -29,6 +32,13 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
+
+data = {
+  name: "Yosmite Valley",
+  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+};
+
+card = new Card(data);
 
 //Elements: Edit Profile Modal//
 const profileEditButton = document.querySelector(".profile__edit-button");
