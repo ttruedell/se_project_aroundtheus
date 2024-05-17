@@ -1,4 +1,4 @@
-import Card from "../components/Card";
+import Card from "../components/Card.js";
 
 ////Constants//////
 const initialCards = [
@@ -33,12 +33,10 @@ const initialCards = [
   },
 ];
 
-data = {
-  name: "Yosmite Valley",
-  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-};
+const cardTemplate =
+  document.querySelector("#card-template").content.firstElementChild;
 
-card = new Card(data);
+const card = new Card(initialCards, cardTemplate);
 
 //Elements: Edit Profile Modal//
 const profileEditButton = document.querySelector(".profile__edit-button");
@@ -57,8 +55,8 @@ const addNewCardButton = document.querySelector(".profile__add-button");
 const addCardModal = document.querySelector("#add-card-modal");
 const addCardModalCloseButton = addCardModal.querySelector(".modal__close");
 const cardsElement = document.querySelector(".cards");
-const cardTemplate =
-  document.querySelector("#card-template").content.firstElementChild;
+// const cardTemplate =
+//   document.querySelector("#card-template").content.firstElementChild;
 
 const cardForm = addCardModal.querySelector("#add-card-form");
 const cardTitleInput = cardForm.querySelector(".modal__input_type_title");
@@ -158,7 +156,7 @@ function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageElement = cardElement.querySelector(".card__image");
   const cardTextElement = cardElement.querySelector(".card__text");
-  const likeButton = cardElement.querySelector(".card__like-button");
+  const cardLikeButton = cardElement.querySelector(".card__like-button");
   const cardDeleteButton = cardElement.querySelector(".card__delete-button");
   cardDeleteButton.addEventListener("click", () => {
     cardElement.remove();
@@ -171,8 +169,8 @@ function getCardElement(cardData) {
     openModal(imagePreviewModal);
   });
 
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-button_active");
+  cardLikeButton.addEventListener("click", () => {
+    cardLikeButton.classList.toggle("card__like-button_active");
   });
 
   cardImageElement.src = cardData.link;
