@@ -68,21 +68,6 @@
   text-align: left;
   color: #fff;
 }
-/* .modal__container_preview_image {
-  max-width: 75vw;
-  max-height: 75vh;
-}
-
-.modal__container_preview_title {
-  margin: 0;
-  padding: 10px 0 0 0;
-  font-family: "Inter", sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 15px;
-  text-align: left;
-  color: #fff;
-} */
 
 .modal__close {
   position: absolute;
@@ -154,16 +139,13 @@
   cursor: pointer;
 }
 
-/* .modal__button:hover {
-  opacity: 80%;
-} */
-
 .modal__button:hover:not(:disabled) {
   opacity: 0.8;
 }
 
 .modal__button_disabled {
-  opacity: 20%;
+  opacity: 0.2;
+  cursor: default;
 }
 
 .modal__error_visible {

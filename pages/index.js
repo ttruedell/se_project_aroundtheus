@@ -1,6 +1,4 @@
-import { initializeFormValidators } from "../components/FormValidator.js";
-
-initializeFormValidators();
+import FormValidator from "../components/FormValidator.js";
 
 import Card from "../components/Card.js";
 
@@ -36,6 +34,14 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
+const settings = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
 
 //Elements: Edit Profile Modal//
 const profileEditButton = document.querySelector(".profile__edit-button");
@@ -73,6 +79,18 @@ const imagePreviewModalTitle = imagePreviewModal.querySelector(
 
 ///Element: Select Modals
 const modalElements = document.querySelectorAll(".modal");
+
+//Elements: Form Validators
+const editForm = document.querySelector("#edit-profile-modal");
+const addForm = document.querySelector("#add-card-modal");
+
+const editFormValidator = new FormValidator(settings, editForm);
+editFormValidator.enableValidation();
+
+const addFormValidator = new FormValidator(settings, addForm);
+addFormValidator.enableValidation();
+
+const toggleAddButtonState = () => addFormValidator._toggleButtonState();
 
 //Functions//
 function openModal(modal) {
@@ -174,6 +192,8 @@ function handleAddCardSubmit(event) {
   const link = cardUrlInput.value;
   renderCard({ name, link }, cardsElement);
   cardForm.reset();
+  //
+  toggleAddButtonState();
   closeModal(addCardModal);
 }
 

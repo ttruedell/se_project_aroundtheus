@@ -1,4 +1,4 @@
-class FormValidator {
+export default class FormValidator {
   constructor(settings, formElement) {
     this._form = formElement;
     this._inputSelector = settings.inputSelector;
@@ -65,22 +65,22 @@ class FormValidator {
   }
 }
 
-const settings = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
+// const settings = {
+//   formSelector: ".modal__form",
+//   inputSelector: ".modal__input",
+//   submitButtonSelector: ".modal__button",
+//   inactiveButtonClass: "modal__button_disabled",
+//   inputErrorClass: "modal__input_type_error",
+//   errorClass: "modal__error_visible",
+// };
 
-export function initializeFormValidators() {
-  const editForm = document.querySelector("#edit-profile-modal");
-  const addForm = document.querySelector("#add-card-modal");
+// function initializeFormValidators() {
+//   const editForm = document.querySelector("#edit-profile-modal");
+//   const addForm = document.querySelector("#add-card-modal");
 
-  const editFormValidator = new FormValidator(settings, editForm);
-  editFormValidator.enableValidation();
+//   const editFormValidator = new FormValidator(settings, editForm);
+//   editFormValidator.enableValidation();
 
-  const addFormValidator = new FormValidator(settings, addForm);
-  addFormValidator.enableValidation();
-}
+//   const addFormValidator = new FormValidator(settings, addForm);
+//   addFormValidator.enableValidation();
+// }
