@@ -90,7 +90,7 @@ editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(settings, addForm);
 addFormValidator.enableValidation();
 
-const toggleAddButtonState = () => addFormValidator._toggleButtonState();
+const toggleAddButtonState = () => addFormValidator.toggleButtonState();
 
 //Functions//
 function openModal(modal) {
@@ -192,7 +192,6 @@ function handleAddCardSubmit(event) {
   const link = cardUrlInput.value;
   renderCard({ name, link }, cardsElement);
   cardForm.reset();
-  //
   toggleAddButtonState();
   closeModal(addCardModal);
 }

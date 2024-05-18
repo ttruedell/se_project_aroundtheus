@@ -38,6 +38,10 @@ export default class FormValidator {
     return this._inputEls.some((inputEl) => !inputEl.validity.valid);
   }
 
+  toggleButtonState() {
+    this._toggleButtonState();
+  }
+
   _toggleButtonState() {
     if (this._hasInvalidInput()) {
       this._submitButton.classList.add(this._inactiveButtonClass);
