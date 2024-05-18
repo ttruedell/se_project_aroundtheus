@@ -154,8 +154,12 @@
   cursor: pointer;
 }
 
-.modal__button:hover {
+/* .modal__button:hover {
   opacity: 80%;
+} */
+
+.modal__button:hover:not(:disabled) {
+  opacity: 0.8;
 }
 
 .modal__button_disabled {

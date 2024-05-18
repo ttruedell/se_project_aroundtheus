@@ -7,25 +7,19 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._cardLikeButton.addEventListener("click", () =>
-      this._handleLikeButton()
-    );
-    this._cardDeleteButton.addEventListener("click", () =>
-      this._handleDeleteButton()
-    );
-    this._cardImageElement.addEventListener("click", () =>
-      this._handleImageClick()
-    );
+    this._cardLikeButton.addEventListener("click", this._handleLikeButton);
+    this._cardDeleteButton.addEventListener("click", this._handleDeleteButton);
+    this._cardImageElement.addEventListener("click", this._handleImageClick);
   }
 
-  _handleLikeButton() {
+  _handleLikeButton = () => {
     this._cardLikeButton.classList.toggle("card__like-button_active");
-  }
+  };
 
-  _handleDeleteButton() {
+  _handleDeleteButton = () => {
     this._element.remove();
     this._element = null;
-  }
+  };
 
   _getTemplate() {
     return document
