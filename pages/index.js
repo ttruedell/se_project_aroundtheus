@@ -37,10 +37,6 @@ const initialCards = [
   },
 ];
 
-const cardData = initialCards[0];
-
-const cardSelector = "#card-template";
-
 //Elements: Edit Profile Modal//
 const profileEditButton = document.querySelector(".profile__edit-button");
 const editProfileModal = document.querySelector("#edit-profile-modal");
@@ -150,7 +146,7 @@ function removeClickOutsideModalListener() {
 
 //Function: Render Card
 function renderCard(cardData, container) {
-  const card = new Card(cardData, cardSelector, () =>
+  const card = new Card(cardData, "#card-template", () =>
     handleImageClick(cardData.name, cardData.link)
   );
   container.prepend(card.getView());
