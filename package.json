@@ -18,5 +18,6 @@
   "bugs": {
     "url": "https://github.com/ttruedell/se_project_aroundtheus/issues"
   },
-  "homepage": "https://github.com/ttruedell/se_project_aroundtheus#readme"
+  "homepage": "https://github.com/ttruedell/se_project_aroundtheus#readme",
+  "devDependencies": {}
 }

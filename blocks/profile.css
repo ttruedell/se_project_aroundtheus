@@ -100,6 +100,7 @@
   .profile__edit-button {
     height: 18px;
     width: 18px;
+    margin-right: 20px;
   }
 
   .profile__description {
