@@ -1,3 +1,9 @@
+import "./index.css";
+import avatarSrc from "../images/Avatar.png";
+
+const avatarImage = document.getElementById("Avatar-image");
+avatarImage.src = avatarSrc;
+
 import FormValidator from "../components/FormValidator.js";
 
 import Card from "../components/Card.js";
