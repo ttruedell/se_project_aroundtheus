@@ -105,26 +105,6 @@ function handleProfileEditButton() {
   editProfileModal.open();
 }
 
-function handleProfileEditSubmit(event) {
-  event.preventDefault();
-  const userData = {
-    name: profileNameInput.value,
-    job: profileDescriptionInput.value,
-  };
-  userInfo.setUserInfo(userData);
-  editProfileModal.close();
-}
-
 //Event Listeners//
 profileEditButton.addEventListener("click", handleProfileEditButton);
-profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addNewCardButton.addEventListener("click", () => addCardModal.open());
-cardForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  addCardModal.close();
-});
-
-initialCards.forEach((cardData) => {
-  const cardElement = createCard(cardData);
-  section.addItem(cardElement);
-});
