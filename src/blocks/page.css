@@ -1,0 +1,28 @@
+.page {
+  background-color: #000;
+  display: grid;
+  grid-template-columns: minmax(min-content, 880px);
+  justify-content: center;
+  align-items: center;
+  padding: 45px 10px 0px 10px;
+  min-height: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+@media screen and (max-width: 916px) {
+  .page {
+    grid-template-columns: minmax(min-content, 600px);
+  }
+}
+
+@media screen and (max-width: 617px) {
+  .page {
+    grid-template-columns: minmax(min-content, 320px);
+    padding: 28px 0 0 0;
+  }
+}
