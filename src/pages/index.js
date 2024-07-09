@@ -15,6 +15,8 @@ import UserInfo from "../components/UserInfo.js";
 
 import { initialCards, settings } from "../utils/constants.js";
 
+import Api from "../components/Api.js";
+
 //Elements: Edit Profile Modal//
 const profileEditButton = document.querySelector(".profile__edit-button");
 const profileNameInput = document.querySelector("#profile-name-input");
