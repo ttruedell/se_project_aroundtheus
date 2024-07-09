@@ -110,3 +110,21 @@ function handleProfileEditButton() {
 //Event Listeners//
 profileEditButton.addEventListener("click", handleProfileEditButton);
 addNewCardButton.addEventListener("click", () => addCardModal.open());
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "7fceffaf-7edb-4767-9088-73656e156a21",
+    "Content-Type": "application/json",
+  },
+});
+
+api
+  .getInitialCards()
+  .then((result) => {
+    // process the result
+    console.log(result);
+  })
+  .catch((err) => {
+    console.error(err); // log the error to the console
+  });

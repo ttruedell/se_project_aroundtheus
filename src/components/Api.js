@@ -5,8 +5,9 @@ export default class Api {
 
   getInitialCards() {
     return fetch("https://around-api.en.tripleten-services.com/v1/cards", {
+      method: "GET",
       headers: {
-        authorization: "c56e30dc-2883-4270-a59e-b2f7bae969c6",
+        authorization: "7fceffaf-7edb-4767-9088-73656e156a21",
       },
     }).then((res) => {
       if (res.ok) {
@@ -16,12 +17,25 @@ export default class Api {
   }
 
   // other methods for working with the API
+
+  loadUserInfo() {
+    fetch("https://around-api.en.tripleten-services.com/v1/users/me", {});
+  }
 }
 
-const api = new Api({
-  baseUrl: "https://around-api.en.tripleten-services.com/v1",
-  headers: {
-    authorization: "48dd4a18-4dc3-4f52-a68d-790bb2d39f03",
-    "Content-Type": "application/json",
-  },
-});
+// const api = new Api({
+//   baseUrl: "https://around-api.en.tripleten-services.com/v1",
+//   headers: {
+//     authorization: "7fceffaf-7edb-4767-9088-73656e156a21",
+//     "Content-Type": "application/json",
+//   },
+// });
+
+// api
+//   .getInitialCards()
+//   .then((result) => {
+//     // process the result
+//   })
+//   .catch((err) => {
+//     console.error(err); // log the error to the console
+//   });
