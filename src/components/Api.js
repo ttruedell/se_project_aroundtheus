@@ -48,7 +48,7 @@ export default class Api {
       headers: this.headers,
       body: JSON.stringify(data),
     })
-      .then(c)
+      .then(this._checkResponse)
       .catch((error) => console.error("Error creating card:", error));
   }
 

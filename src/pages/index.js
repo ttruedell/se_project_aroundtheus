@@ -91,7 +91,8 @@ const userInfo = new UserInfo({
 // Intialize Section
 const section = new Section(
   {
-    items: initialCards,
+    // items: initialCards,
+    items: [],
     renderer: (cardData) => {
       const cardElement = createCard(cardData);
       section.addItem(cardElement);
@@ -100,7 +101,7 @@ const section = new Section(
   ".cards"
 );
 
-section.renderItems();
+// section.renderItems();
 
 // Initialize API
 const api = new Api({
