@@ -46,18 +46,39 @@ const toggleAddButtonState = () => addFormValidator.toggleButtonState();
 //Initialize Modals
 const editProfileModal = new PopupWithForm({
   popupSelector: "#edit-profile-modal",
+  // handleFormSubmit: (data) => {
+  //   userInfo.setUserInfo({ name: data.name, job: data.job });
+  // },
   handleFormSubmit: (data) => {
-    userInfo.setUserInfo({ name: data.name, job: data.job });
+    api
+      .updateUserInfo(data)
+      .then((updatedUserInfo) => {
+        userInfo.setUserInfo(updatedUserInfo);
+        editProfileModal.close();
+      })
+      .catch((error) => console.error("Error updating user info:", error));
   },
 });
 
 const addCardModal = new PopupWithForm({
   popupSelector: "#add-card-modal",
+  // handleFormSubmit: (data) => {
+  //   const cardElement = createCard({ name: data.title, link: data.url });
+  //   section.addItem(cardElement);
+  //   cardForm.reset();
+  //   toggleAddButtonState();
+  // },
   handleFormSubmit: (data) => {
-    const cardElement = createCard({ name: data.title, link: data.url });
-    section.addItem(cardElement);
-    cardForm.reset();
-    toggleAddButtonState();
+    api
+      .addCard(data)
+      .then((newCard) => {
+        const cardElement = createCard(newCard);
+        section.addItem(cardElement);
+        cardForm.reset();
+        toggleAddButtonState();
+        addCardModal.close();
+      })
+      .catch((error) => console.error("Error adding new card:", error));
   },
 });
 
@@ -80,6 +101,24 @@ const section = new Section(
 );
 
 section.renderItems();
+
+// Initialize API
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1/",
+  headers: {
+    authorization: "c58369c4-dcd4-4208-8726-c10df21880b5",
+    "Content-Type": "application/json",
+  },
+});
+
+// Fetch inital data
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([user, cards]) => {
+    userInfo.setUserInfo(user);
+    section.setItems(cards);
+    section.renderItems();
+  })
+  .catch((error) => console.error("Error loading data:", error));
 
 // Modal Event Listeners
 editProfileModal.setEventListeners();
@@ -111,20 +150,30 @@ function handleProfileEditButton() {
 profileEditButton.addEventListener("click", handleProfileEditButton);
 addNewCardButton.addEventListener("click", () => addCardModal.open());
 
-const api = new Api({
-  baseUrl: "https://around-api.en.tripleten-services.com/v1",
-  headers: {
-    authorization: "7fceffaf-7edb-4767-9088-73656e156a21",
-    "Content-Type": "application/json",
-  },
-});
+// const api = new Api({
+//   baseUrl: "https://around-api.en.tripleten-services.com/v1/",
+//   headers: {
+//     authorization: "c58369c4-dcd4-4208-8726-c10df21880b5",
+//     "Content-Type": "application/json",
+//   },
+// });
 
-api
-  .getInitialCards()
-  .then((result) => {
-    // process the result
-    console.log(result);
-  })
-  .catch((err) => {
-    console.error(err); // log the error to the console
-  });
+// function renderUserInfo(user) {
+//   userInfo.setUserInfo(user);
+// }
+
+// function renderCards(cards) {
+//   cards.forEach((cardData) => {
+//     const cardElement = createCard(cardData);
+//     section.addItem(cardElement);
+//   });
+// }
+
+// document.addEventListener("DOMContentLoaded", () => {
+//   Promise.all([api.getUserInfo(), api.getInitialCards()])
+//     .then(([user, cards]) => {
+//       renderUserInfo(user);
+//       renderCards(cards);
+//     })
+//     .catch((error) => console.error("Error loading data:", error));
+// });
