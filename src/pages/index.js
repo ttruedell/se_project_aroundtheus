@@ -104,7 +104,7 @@ section.renderItems();
 
 // Initialize API
 const api = new Api({
-  baseUrl: "https://around-api.en.tripleten-services.com/v1/",
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
     authorization: "c58369c4-dcd4-4208-8726-c10df21880b5",
     "Content-Type": "application/json",
