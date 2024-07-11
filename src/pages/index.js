@@ -69,14 +69,25 @@ const addCardModal = new PopupWithForm({
   //   toggleAddButtonState();
   // },
   handleFormSubmit: (data) => {
+    const cardData = {
+      name: data.title,
+      link: data.url,
+    };
     api
-      .addCard(data)
+      .addCard(cardData)
       .then((newCard) => {
-        const cardElement = createCard(newCard);
-        section.addItem(cardElement);
-        cardForm.reset();
-        toggleAddButtonState();
-        addCardModal.close();
+        if (newCard && newCard.name && newCard.link) {
+          const cardElement = createCard({
+            name: newCard.name,
+            link: newCard.link,
+          });
+          section.addItem(cardElement);
+          cardForm.reset();
+          toggleAddButtonState();
+          addCardModal.close();
+        } else {
+          console.error("Invalid card data:", newCard);
+        }
       })
       .catch((error) => console.error("Error adding new card:", error));
   },
@@ -91,8 +102,8 @@ const userInfo = new UserInfo({
 // Intialize Section
 const section = new Section(
   {
-    // items: initialCards,
-    items: [],
+    items: initialCards,
+    // items: [],s
     renderer: (cardData) => {
       const cardElement = createCard(cardData);
       section.addItem(cardElement);
@@ -124,9 +135,15 @@ const api = new Api({
 api
   .getAllData()
   .then(({ user, cards }) => {
-    userInfo.setUserInfo(user);
-    section.setItems(cards);
-    section.renderItems();
+    console.log("Initial user data:", user);
+    console.log("Initial cards data:", cards);
+    if (user && cards) {
+      userInfo.setUserInfo(user);
+      // section.setItems(cards);
+      section.renderItems();
+    } else {
+      console.error("Error: Received undefined user or cards data");
+    }
   })
   .catch((error) => console.error("Error loading data", error));
 
