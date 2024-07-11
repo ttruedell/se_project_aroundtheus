@@ -113,13 +113,22 @@ const api = new Api({
 });
 
 // Fetch inital data
-Promise.all([api.getUserInfo(), api.getInitialCards()])
-  .then(([user, cards]) => {
+// Promise.all([api.getUserInfo(), api.getInitialCards()])
+//   .then(([user, cards]) => {
+//     userInfo.setUserInfo(user);
+//     section.setItems(cards);
+//     section.renderItems();
+//   })
+//   .catch((error) => console.error("Error loading data:", error));
+
+api
+  .getAllData()
+  .then(({ user, cards }) => {
     userInfo.setUserInfo(user);
     section.setItems(cards);
     section.renderItems();
   })
-  .catch((error) => console.error("Error loading data:", error));
+  .catch((error) => console.error("Error loading data", error));
 
 // Modal Event Listeners
 editProfileModal.setEventListeners();

@@ -10,6 +10,15 @@ export default class Api {
     }
     return response.json();
   }
+
+  getAllData() {
+    return Promise.all([this.getUserInfo(), this.getInitialCards()])
+      .then(([user, cards]) => {
+        return user, cards;
+      })
+      .catch((error) => console.error("Error loading data:", error));
+  }
+
   getUserInfo() {
     return fetch(`${this.baseUrl}/users/me`, {
       method: "GET",
