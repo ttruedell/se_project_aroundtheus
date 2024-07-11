@@ -1,17 +1,3 @@
-// export default class Api {
-//   constructor(options) {
-//     // constructor body
-//     this.baseUrl = options.baseUrl;
-//     this.headers = options.headers;
-//   }
-
-//   getInitialCards() {
-
-//   }
-
-//   // other methods for working with the API
-
-// }
 export default class Api {
   constructor(options) {
     this.baseUrl = options.baseUrl;
@@ -40,6 +26,15 @@ export default class Api {
     })
       .then(this._checkResponse)
       .catch((error) => console.error("Error fetching initial cards:", error));
+  }
+  updateUserInfo(data) {
+    return fetch(`${this.baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this.headers,
+      body: JSON.stringify(data),
+    })
+      .then(this._checkResponse)
+      .catch((error) => console.error("Error updating user info:", error));
   }
 
   createCard(data) {
@@ -77,16 +72,6 @@ export default class Api {
     })
       .then(this._checkResponse)
       .catch((error) => console.error("Error disliking card:", error));
-  }
-
-  updateUserInfo(data) {
-    return fetch(`${this.baseUrl}/users/me`, {
-      method: "PATCH",
-      headers: this.headers,
-      body: JSON.stringify(data),
-    })
-      .then(this._checkResponse)
-      .catch((error) => console.error("Error updating user info:", error));
   }
 
   updateUserAvatar(data) {
