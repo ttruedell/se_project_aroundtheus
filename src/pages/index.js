@@ -1,4 +1,4 @@
-import "./index.css";
+import "../pages/index.css";
 import avatarSrc from "../images/Avatar.png";
 
 const avatarImage = document.getElementById("Avatar-image");
