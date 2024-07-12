@@ -12,14 +12,14 @@ export default class Api {
   }
 
   getAllData() {
-    return Promise.all([this.getUserInfo(), this.getInitialCards()])
+    return Promise.all([this.loadUserInfo(), this.getInitialCards()])
       .then(([user, cards]) => {
         return { user, cards };
       })
       .catch((error) => console.error("Error loading data:", error));
   }
 
-  getUserInfo() {
+  loadUserInfo() {
     return fetch(`${this.baseUrl}/users/me`, {
       method: "GET",
       headers: this.headers,
@@ -41,7 +41,10 @@ export default class Api {
     return fetch(`${this.baseUrl}/users/me`, {
       method: "PATCH",
       headers: this.headers,
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        name: data.name,
+        about: data.about,
+      }),
     })
       .then(this._checkResponse)
       .catch((error) => console.error("Error updating user info:", error));
@@ -51,7 +54,10 @@ export default class Api {
     return fetch(`${this.baseUrl}/cards`, {
       method: "POST",
       headers: this.headers,
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        name: data.name,
+        link: data.link,
+      }),
     })
       .then(this._checkResponse)
       .catch((error) => console.error("Error creating card:", error));

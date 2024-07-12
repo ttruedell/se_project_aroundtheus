@@ -50,8 +50,12 @@ const editProfileModal = new PopupWithForm({
   //   userInfo.setUserInfo({ name: data.name, job: data.job });
   // },
   handleFormSubmit: (data) => {
+    const userData = {
+      name: data.name,
+      about: data.about,
+    };
     api
-      .updateUserInfo(data)
+      .updateUserInfo(userData)
       .then((updatedUserInfo) => {
         userInfo.setUserInfo(updatedUserInfo);
         editProfileModal.close();
@@ -97,13 +101,14 @@ const addCardModal = new PopupWithForm({
 const userInfo = new UserInfo({
   nameSelector: ".profile__name",
   jobSelector: ".profile__description",
+  avatarSelector: ".profile__avatar",
 });
 
 // Intialize Section
 const section = new Section(
   {
-    items: initialCards,
-    // items: [],s
+    // items: initialCards,
+    items: [],
     renderer: (cardData) => {
       const cardElement = createCard(cardData);
       section.addItem(cardElement);
@@ -123,27 +128,16 @@ const api = new Api({
   },
 });
 
-// Fetch inital data
-// Promise.all([api.getUserInfo(), api.getInitialCards()])
-//   .then(([user, cards]) => {
-//     userInfo.setUserInfo(user);
-//     section.setItems(cards);
-//     section.renderItems();
-//   })
-//   .catch((error) => console.error("Error loading data:", error));
-
+//
 api
   .getAllData()
   .then(({ user, cards }) => {
     console.log("Initial user data:", user);
     console.log("Initial cards data:", cards);
-    if (user && cards) {
-      userInfo.setUserInfo(user);
-      // section.setItems(cards);
-      section.renderItems();
-    } else {
-      console.error("Error: Received undefined user or cards data");
-    }
+
+    userInfo.setUserInfo(user);
+    const allCards = [...initialCards, ...cards];
+    section.renderItems(allCards);
   })
   .catch((error) => console.error("Error loading data", error));
 
@@ -169,7 +163,7 @@ function handleImageClick(name, link) {
 function handleProfileEditButton() {
   const userData = userInfo.getUserInfo();
   profileNameInput.value = userData.name;
-  profileDescriptionInput.value = userData.job;
+  profileDescriptionInput.value = userData.about;
   editProfileModal.open();
 }
 
