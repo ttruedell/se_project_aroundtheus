@@ -81,7 +81,7 @@ export default class Api {
       .catch((error) => console.error("Error liking card:", error));
   }
 
-  dislikeCard(cardId) {
+  unlikeCard(cardId) {
     return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this.headers,

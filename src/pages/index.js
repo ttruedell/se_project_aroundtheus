@@ -16,6 +16,7 @@ import UserInfo from "../components/UserInfo.js";
 import { initialCards, settings } from "../utils/constants.js";
 
 import Api from "../components/Api.js";
+import Popup from "../components/Popup.js";
 
 //Elements: Edit Profile Modal//
 const profileEditButton = document.querySelector(".profile__edit-button");
@@ -32,6 +33,12 @@ const cardForm = document.querySelector("#add-card-form");
 //Elements: Image Preview Modal
 const imagePreviewModal = new PopupWithImage({
   popupSelector: "#image-preview-modal",
+});
+
+// Elements: Delete Card Preview Modal
+const deleteCardButton = document.querySelector(".card__delete-button");
+const deleteCardPreview = new Popup({
+  popupSelector: "#delete-card-modal",
 });
 
 //Elements: Form Validators
@@ -100,6 +107,10 @@ const addCardModal = new PopupWithForm({
   },
 });
 
+// const deleteCardModal = new Popup({
+//   popupSelector: "#delete-card-modal",
+// });
+
 // Initialize User Info
 const userInfo = new UserInfo({
   nameSelector: ".profile__name",
@@ -141,8 +152,6 @@ api
     const cardElement = cards.map((cardData) => createCard(cardData));
     section.renderItems(cardElement);
     userInfo.setUserInfo(user);
-    /////
-
     // if (cards.length === 0) {
     //   console.log("No cards found on the server. Adding initial cards.");
     //   addInitialCards(initialCards)
@@ -157,18 +166,6 @@ api
     // }
   })
   .catch((error) => console.error("Error loading data", error));
-
-// api.deleteCard("669204f58bacc8001afc0c8a");
-
-function handleDeleteCard(card) {
-  const cardId = card._id; // Assuming each card has an _id property
-  api
-    .deleteCard(cardId)
-    .then(() => {
-      card.removeCard();
-    })
-    .catch((error) => console.error("Error deleting card:", error));
-}
 
 // function addInitialCards(cards) {
 //   const promises = cards.map((cardData) => {
@@ -199,28 +196,52 @@ function handleDeleteCard(card) {
 
 ///
 // Modal Event Listeners
+
 editProfileModal.setEventListeners();
 addCardModal.setEventListeners();
 imagePreviewModal.setEventListeners();
+deleteCardPreview.setEventListeners();
 
 //Function: Render Card
 function createCard(cardData) {
   const card = new Card(
     cardData,
     "#card-template",
-    () => handleImageClick(cardData.name, cardData.link)
-    //
-    // (card) => handleDeleteCard(card)
-    //
+    () => handleImageClick(cardData.name, cardData.link),
+    handleDeleteCard,
+    handleLikeClick
   );
   const cardElement = card.getView();
   console.log("Created card element:", cardElement);
   return cardElement;
 }
 
+// Function: Delete Card
+function handleDeleteCard(card) {
+  const cardId = card._id; // Assuming each card has an _id property
+  api
+    .deleteCard(cardId)
+    .then(() => {
+      card.removeCard();
+    })
+    .catch((error) => console.error("Error deleting card:", error));
+}
+
+// Function: Like/Dislike Card
+function handleLikeClick(cardId, isLiked) {
+  if (isLiked) {
+    return api.unlikeCard(cardId);
+  } else {
+    return api.likeCard(cardId);
+  }
+}
+
 //Event Handlers//
 function handleImageClick(name, link) {
   imagePreviewModal.open({ name, link });
+}
+function handleDeleteClick() {
+  deleteCardPreview.open();
 }
 
 function handleProfileEditButton() {
@@ -233,3 +254,4 @@ function handleProfileEditButton() {
 //Event Listeners//
 profileEditButton.addEventListener("click", handleProfileEditButton);
 addNewCardButton.addEventListener("click", () => addCardModal.open());
+deleteCardButton.addEventListener("click", () => handleDeleteClick.open());
