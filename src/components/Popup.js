@@ -3,7 +3,6 @@ export default class Popup {
     this._popupElement = document.querySelector(popupSelector);
     this._handleEscClose = this._handleEscClose.bind(this);
     this._handleClickOutsideModal = this._handleClickOutsideModal.bind(this);
-    this._onConfirm = onConfirm;
   }
 
   open() {
