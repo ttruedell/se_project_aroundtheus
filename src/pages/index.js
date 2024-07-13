@@ -143,18 +143,18 @@ api
     userInfo.setUserInfo(user);
     /////
 
-    if (cards.length === 0) {
-      console.log("No cards found on the server. Adding initial cards.");
-      addInitialCards(initialCards)
-        .then(() => api.getInitialCards())
-        .then((newCards) => {
-          console.log("New cards added from initial cards:", newCards);
-          section.renderItems(newCards);
-        });
-    } else {
-      console.log("Rendering cards from the server:", cards);
-      section.renderItems();
-    }
+    // if (cards.length === 0) {
+    //   console.log("No cards found on the server. Adding initial cards.");
+    //   addInitialCards(initialCards)
+    //     .then(() => api.getInitialCards())
+    //     .then((newCards) => {
+    //       console.log("New cards added from initial cards:", newCards);
+    //       section.renderItems(newCards);
+    //     });
+    // } else {
+    //   console.log("Rendering cards from the server:", cards);
+    //   section.renderItems(items);
+    // }
   })
   .catch((error) => console.error("Error loading data", error));
 
@@ -170,31 +170,31 @@ function handleDeleteCard(card) {
     .catch((error) => console.error("Error deleting card:", error));
 }
 
-function addInitialCards(cards) {
-  const promises = cards.map((cardData) => {
-    console.log("Adding card:", cardData);
-    return api
-      .addCard(cardData)
-      .then((newCard) => {
-        console.log("Adding card:", cardData);
-        // if (newCard && newCard.name && newCard.link) {
-        const cardElement = createCard({
-          name: newCard.name,
-          link: newCard.link,
-          //
-          _id: newCard._id,
-          //
-        });
-        section.addItem(cardElement);
-        // } else {
-        //   console.error("Invalid card data:", newCard);
-        // }
-      })
-      .catch((error) => console.error("Error adding card:", error));
-  });
-  console.log("Checking promies:", promises);
-  return Promise.all(promises);
-}
+// function addInitialCards(cards) {
+//   const promises = cards.map((cardData) => {
+//     console.log("Adding card:", cardData);
+//     return api
+//       .addCard(cardData)
+//       .then((newCard) => {
+//         console.log("Adding card:", cardData);
+//         // if (newCard && newCard.name && newCard.link) {
+//         const cardElement = createCard({
+//           name: newCard.name,
+//           link: newCard.link,
+//           //
+//           _id: newCard._id,
+//           //
+//         });
+//         section.addItem(cardElement);
+//         // } else {
+//         //   console.error("Invalid card data:", newCard);
+//         // }
+//       })
+//       .catch((error) => console.error("Error adding card:", error));
+//   });
+//   console.log("Checking promies:", promises);
+//   return Promise.all(promises);
+// }
 ///
 
 ///

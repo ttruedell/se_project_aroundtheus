@@ -46,6 +46,12 @@
   width: 358px;
 }
 
+.modal__container_delete-card {
+  padding: 34px 36px 36px 36px;
+  width: 358px;
+  height: 111px;
+}
+
 .modal__preview-container {
   position: relative;
   background-color: transparent;
@@ -139,6 +145,13 @@
   cursor: pointer;
 }
 
+.modal__button_delete-card {
+  width: 358px;
+  height: 50px;
+  margin: 38px 0 0 0;
+  padding: 14px 129px;
+}
+
 .modal__button:hover:not(:disabled) {
   opacity: 0.8;
 }
@@ -194,5 +207,10 @@
     font-size: 14px;
     line-height: 17px;
     margin: 45px 0 0 0;
+  }
+
+  .modal__button_delete-card {
+    width: 282px;
+    margin: 38px 0 0 0;
   }
 }
