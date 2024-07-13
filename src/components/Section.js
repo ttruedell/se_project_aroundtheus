@@ -3,10 +3,14 @@ export default class Section {
     this._items = items;
     this._renderer = renderer;
     this._container = document.querySelector(containerSelector);
+
+    console.log("Section initialized with items:", this._items);
   }
 
-  renderItems() {
-    this._items.forEach((item) => {
+  renderItems(items) {
+    console.log("Rendering items:", items);
+    items.forEach((item) => {
+      console.log("Rendering card:", item);
       this._renderer(item);
     });
   }

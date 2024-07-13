@@ -84,6 +84,9 @@ const addCardModal = new PopupWithForm({
           const cardElement = createCard({
             name: newCard.name,
             link: newCard.link,
+            //
+            _id: newCard._id,
+            //
           });
           section.addItem(cardElement);
           cardForm.reset();
@@ -110,13 +113,14 @@ const section = new Section(
     // items: initialCards,
     items: [],
     renderer: (cardData) => {
-      const cardElement = createCard(cardData);
-      section.addItem(cardElement);
+      // const cardElement = createCard(cardData);
+      section.addItem(cardData);
     },
   },
   ".cards"
 );
 
+console.log("Section instance:", section);
 // section.renderItems();
 
 // Initialize API
@@ -128,19 +132,72 @@ const api = new Api({
   },
 });
 
-//
+// Fetch and Render Initial Data
 api
   .getAllData()
   .then(({ user, cards }) => {
     console.log("Initial user data:", user);
     console.log("Initial cards data:", cards);
-
+    const cardElement = cards.map((cardData) => createCard(cardData));
+    section.renderItems(cardElement);
     userInfo.setUserInfo(user);
-    const allCards = [...initialCards, ...cards];
-    section.renderItems(allCards);
+    /////
+
+    if (cards.length === 0) {
+      console.log("No cards found on the server. Adding initial cards.");
+      addInitialCards(initialCards)
+        .then(() => api.getInitialCards())
+        .then((newCards) => {
+          console.log("New cards added from initial cards:", newCards);
+          section.renderItems(newCards);
+        });
+    } else {
+      console.log("Rendering cards from the server:", cards);
+      section.renderItems();
+    }
   })
   .catch((error) => console.error("Error loading data", error));
 
+// api.deleteCard("669204f58bacc8001afc0c8a");
+
+function handleDeleteCard(card) {
+  const cardId = card._id; // Assuming each card has an _id property
+  api
+    .deleteCard(cardId)
+    .then(() => {
+      card.removeCard();
+    })
+    .catch((error) => console.error("Error deleting card:", error));
+}
+
+function addInitialCards(cards) {
+  const promises = cards.map((cardData) => {
+    console.log("Adding card:", cardData);
+    return api
+      .addCard(cardData)
+      .then((newCard) => {
+        console.log("Adding card:", cardData);
+        // if (newCard && newCard.name && newCard.link) {
+        const cardElement = createCard({
+          name: newCard.name,
+          link: newCard.link,
+          //
+          _id: newCard._id,
+          //
+        });
+        section.addItem(cardElement);
+        // } else {
+        //   console.error("Invalid card data:", newCard);
+        // }
+      })
+      .catch((error) => console.error("Error adding card:", error));
+  });
+  console.log("Checking promies:", promises);
+  return Promise.all(promises);
+}
+///
+
+///
 // Modal Event Listeners
 editProfileModal.setEventListeners();
 addCardModal.setEventListeners();
@@ -148,11 +205,17 @@ imagePreviewModal.setEventListeners();
 
 //Function: Render Card
 function createCard(cardData) {
-  const card = new Card(cardData, "#card-template", () =>
-    handleImageClick(cardData.name, cardData.link)
+  const card = new Card(
+    cardData,
+    "#card-template",
+    () => handleImageClick(cardData.name, cardData.link)
+    //
+    // (card) => handleDeleteCard(card)
+    //
   );
-  //
-  return card.getView();
+  const cardElement = card.getView();
+  console.log("Created card element:", cardElement);
+  return cardElement;
 }
 
 //Event Handlers//
@@ -170,31 +233,3 @@ function handleProfileEditButton() {
 //Event Listeners//
 profileEditButton.addEventListener("click", handleProfileEditButton);
 addNewCardButton.addEventListener("click", () => addCardModal.open());
-
-// const api = new Api({
-//   baseUrl: "https://around-api.en.tripleten-services.com/v1/",
-//   headers: {
-//     authorization: "c58369c4-dcd4-4208-8726-c10df21880b5",
-//     "Content-Type": "application/json",
-//   },
-// });
-
-// function renderUserInfo(user) {
-//   userInfo.setUserInfo(user);
-// }
-
-// function renderCards(cards) {
-//   cards.forEach((cardData) => {
-//     const cardElement = createCard(cardData);
-//     section.addItem(cardElement);
-//   });
-// }
-
-// document.addEventListener("DOMContentLoaded", () => {
-//   Promise.all([api.getUserInfo(), api.getInitialCards()])
-//     .then(([user, cards]) => {
-//       renderUserInfo(user);
-//       renderCards(cards);
-//     })
-//     .catch((error) => console.error("Error loading data:", error));
-// });
