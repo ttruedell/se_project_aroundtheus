@@ -62,6 +62,9 @@ export default class Card {
 
   getView() {
     this._element = this._getTemplate();
+    //
+    // this._element.setAttribute("data-id", this._id); // Set data-id attribute
+    //
     this._cardImageElement = this._element.querySelector(".card__image");
     this._cardTextElement = this._element.querySelector(".card__text");
     this._cardLikeButton = this._element.querySelector(".card__like-button");

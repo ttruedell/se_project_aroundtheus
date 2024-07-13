@@ -35,12 +35,27 @@ const imagePreviewModal = new PopupWithImage({
   popupSelector: "#image-preview-modal",
 });
 
+//
+//
 // Elements: Delete Card Preview Modal
 const deleteCardButton = document.querySelector(".card__delete-button");
+// const deleteCardPreview = new Popup({
+//   popupSelector: "#delete-card-modal",
+// });
 const deleteCardPreview = new Popup({
   popupSelector: "#delete-card-modal",
+  onConfirm: () => handleDeleteCard(currentCardId), // Use a variable to track the current card ID
 });
 
+let currentCardId; // Track the current card ID
+
+function handleDeleteCard(card) {
+  currentCardId = card._id; // Set the current card ID
+  deleteCardPreview.open(); // Open the confirmation modal
+}
+
+//
+//
 //Elements: Form Validators
 const editFormValidator = new FormValidator(settings, profileEditForm);
 editFormValidator.enableValidation();
@@ -222,9 +237,19 @@ function handleDeleteCard(card) {
   api
     .deleteCard(cardId)
     .then(() => {
-      card.removeCard();
+      // card.removeCard();
+      section.removeCard(cardId); // Remove card from the section
     })
     .catch((error) => console.error("Error deleting card:", error));
+}
+
+// Function to handle card deletion confirmation
+function handleDeleteCardConfirmation() {
+  const card = deleteCardPreview.getCardToDelete();
+  if (card) {
+    handleDeleteCard(card);
+    deleteCardPreview.close();
+  }
 }
 
 // Function: Like/Dislike Card
@@ -240,8 +265,9 @@ function handleLikeClick(cardId, isLiked) {
 function handleImageClick(name, link) {
   imagePreviewModal.open({ name, link });
 }
-function handleDeleteClick() {
+function handleDeleteClick(card) {
   deleteCardPreview.open();
+  deleteCardPreview.setCardToDelete(card);
 }
 
 function handleProfileEditButton() {
@@ -254,4 +280,4 @@ function handleProfileEditButton() {
 //Event Listeners//
 profileEditButton.addEventListener("click", handleProfileEditButton);
 addNewCardButton.addEventListener("click", () => addCardModal.open());
-deleteCardButton.addEventListener("click", () => handleDeleteClick.open());
+// deleteCardButton.addEventListener("click", () => handleDeleteClick.open());

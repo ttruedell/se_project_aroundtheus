@@ -18,4 +18,13 @@ export default class Section {
   addItem(element) {
     this._container.prepend(element);
   }
+
+  //
+  //
+  removeCard(cardId) {
+    const cardElement = this._container.querySelector(`[data-id="${cardId}"]`);
+    if (cardElement) {
+      cardElement.remove();
+    }
+  }
 }
