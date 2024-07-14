@@ -35,12 +35,8 @@ const imagePreviewModal = new PopupWithImage({
   popupSelector: "#image-preview-modal",
 });
 
-//
-//
 // Elements: Delete Card Preview Modal
-// const confirmDeleteCardButton = document.querySelector(
-//   ".modal__button_delete-card"
-// );
+
 const deleteCardModal = new PopupWithConfirm({
   popupSelector: "#delete-card-modal",
   handleConfirm: () => {
@@ -52,9 +48,6 @@ const deleteCardModal = new PopupWithConfirm({
 });
 
 let currentCard;
-//
-//
-//
 
 //Elements: Form Validators
 const editFormValidator = new FormValidator(settings, profileEditForm);
@@ -237,6 +230,9 @@ function handleDeleteCard(card) {
       // section.removeCard(cardId); // Remove card from the section
     })
     .catch((error) => console.error("Error deleting card:", error));
+  // .finally(() => {
+  //   deleteCardModal._resetButtonState();
+  // });
 }
 // Function to open delete confirmation
 function handleDeleteClick(card) {

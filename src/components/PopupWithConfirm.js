@@ -14,6 +14,7 @@ export default class PopupWithConfirmation extends Popup {
     super.setEventListeners();
     this._confirmButton.addEventListener("click", () => {
       this._handleConfirm();
+      this.setButtonText(".modal__button_delete-card", "Saving...");
       this.close();
     });
   }

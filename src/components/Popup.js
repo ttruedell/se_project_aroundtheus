@@ -9,6 +9,7 @@ export default class Popup {
     this._popupElement.classList.add("modal_opened");
     document.addEventListener("keydown", this._handleEscClose);
     document.addEventListener("mousedown", this._handleClickOutsideModal);
+    this.resetButtonText(".modal__button");
   }
 
   close() {
@@ -57,7 +58,25 @@ export default class Popup {
 
   setEventListeners() {
     const closeButton = this._popupElement.querySelector(".modal__close");
-
     closeButton.addEventListener("click", () => this.close());
   }
+
+  //
+  //
+  setButtonText(buttonSelector, newText) {
+    const button = this._popupElement.querySelector(buttonSelector);
+    if (button) {
+      this._defaultButtonText = button.textContent;
+      button.textContent = newText;
+    }
+  }
+
+  resetButtonText(buttonSelector) {
+    const button = this._popupElement.querySelector(buttonSelector);
+    if (button && this._defaultButtonText) {
+      button.textContent = this._defaultButtonText;
+    }
+  }
+  //
+  //
 }
