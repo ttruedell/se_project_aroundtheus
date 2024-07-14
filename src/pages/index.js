@@ -1,8 +1,12 @@
 import "../pages/index.css";
 import avatarSrc from "../images/Avatar.png";
+import editAvatarSrc from "../images/edit-avatar-vector.svg";
 
 const avatarImage = document.getElementById("Avatar-image");
 avatarImage.src = avatarSrc;
+
+const editVector = document.getElementById("Avatar-edit-vector");
+editVector.src = editAvatarSrc;
 
 import FormValidator from "../components/FormValidator.js";
 
@@ -201,9 +205,7 @@ api
 ///
 // Modal Event Listeners
 
-editProfileModal.setEventListeners();
-addCardModal.setEventListeners();
-imagePreviewModal.setEventListeners();
+//
 
 //Function: Render Card
 function createCard(cardData) {
@@ -267,6 +269,11 @@ function handleProfileEditButton() {
 }
 
 //Event Listeners//
+editProfileModal.setEventListeners();
+addCardModal.setEventListeners();
+imagePreviewModal.setEventListeners();
+
 profileEditButton.addEventListener("click", handleProfileEditButton);
 addNewCardButton.addEventListener("click", () => addCardModal.open());
+avatarImage.addEventListener("click", () => {});
 // confirmDeleteCardButton.addEventListener("click", handleConfirmCardDelete);
