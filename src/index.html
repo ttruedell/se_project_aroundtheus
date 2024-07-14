@@ -125,39 +125,55 @@
       </div>
     </div>
 
-
- <!--  Edit Avatar Modal -->
- <div class="modal" id="edit-avatar-modal">
-  <div
-    class="modal__container modal__container_edit-avatar modal__js-container"
-    id="modal-container-card"
-  >
-    <button class="modal__close"></button>
-    <p class="modal__heading">Change profile picture</p>
-    <form class="modal__form" id="edit-avatar-form">
-            <input
-        class="modal__input modal__input_type_url modal__input_type_avatar"
-        id="avatar-url-input"
-        type="url"
-        name="url"
-        placeholder="Image URL"
-        required
-      />
-      <span
-        class="modal__error modal__error_visible"
-        id="card-url-input-error"
-      ></span>
-      <button
-        type="submit"
-        class="modal__button modal__button_confirm-form "
+    <!--  Edit Avatar Modal -->
+    <div class="modal" id="edit-avatar-modal">
+      <div
+        class="modal__container modal__container_edit-avatar modal__js-container"
+        id="modal-container-card"
       >
-        Save
-      </button>
-    </form>
-  </div>
-</div>
+        <button class="modal__close"></button>
+        <p class="modal__heading">Change profile picture</p>
+        <form class="modal__form" id="edit-avatar-form">
+          <input
+            class="modal__input modal__input_type_url modal__input_type_avatar"
+            id="avatar-url-input"
+            type="url"
+            name="url"
+            placeholder="Image URL"
+            required
+          />
+          <span
+            class="modal__error modal__error_visible"
+            id="card-url-input-error"
+          ></span>
+          <button
+            type="submit"
+            class="modal__button modal__button_confirm-form"
+          >
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
 
-
+    <!--  Delete Card Modal -->
+    <div class="modal" id="delete-card-modal">
+      <div
+        class="modal__container modal__container_delete-card modal__js-container"
+        id="modal-container-card"
+      >
+        <button class="modal__close"></button>
+        <p class="modal__heading">Are you sure?</p>
+        <form
+          class="modal__form modal__form_delete-confirm"
+          id="delete-card-form"
+        >
+          <button type="submit" class="modal__button modal__button_delete-card">
+            Yes
+          </button>
+        </form>
+      </div>
+    </div>
 
     <!-- Image Preview Modal-->
     <div class="modal" id="image-preview-modal">
@@ -171,24 +187,6 @@
         ></button>
         <img class="modal__preview-image" src="-" alt="-" />
         <p class="modal__preview-title"></p>
-      </div>
-    </div>
-    <!---->
-    <!--  Delete Card Preview Modal -->
-    <div class="modal" id="delete-card-modal">
-      <div
-        class="modal__container modal__container_delete-card modal__js-container"
-        id="modal-container-card"
-      >
-        <button class="modal__close"></button>
-        <p class="modal__heading">Are you sure?</p>
-                  <button
-            type="submit"
-            class="modal__button modal__button_delete-card"
-                      >
-            Yes
-          </button>
-        </form>
       </div>
     </div>
 

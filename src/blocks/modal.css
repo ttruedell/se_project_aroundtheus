@@ -49,7 +49,7 @@
 .modal__container_delete-card {
   padding: 34px 36px 36px 36px;
   /* width: 358px; */
-  height: 111px;
+  /* height: 111px; */
 }
 
 .modal__container_edit-avatar {
@@ -153,10 +153,8 @@
 }
 
 .modal__button_delete-card {
-  width: 358px;
   height: 50px;
   margin: 38px 0 0 0;
-  padding: 14px 129px;
 }
 
 .modal__button:hover:not(:disabled) {
@@ -184,7 +182,6 @@
 
   .modal__container {
     padding: 25px 22px;
-    width: 282px;
   }
 
   .modal__close {
@@ -217,7 +214,6 @@
   }
 
   .modal__button_delete-card {
-    width: 282px;
     margin: 38px 0 0 0;
   }
 }
