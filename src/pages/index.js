@@ -63,6 +63,12 @@ addFormValidator.enableValidation();
 const toggleAddButtonState = () => addFormValidator.toggleButtonState();
 
 //Initialize Modals
+
+// const editAvatarModal = new PopupWithForm({
+//   popupSelector: "#edit-avatar-modal",
+//   handleFormSubmit: () => {},
+// });
+
 const editProfileModal = new PopupWithForm({
   popupSelector: "#edit-profile-modal",
   // handleFormSubmit: (data) => {
