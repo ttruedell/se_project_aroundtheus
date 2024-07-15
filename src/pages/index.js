@@ -2,12 +2,6 @@ import "../pages/index.css";
 import avatarSrc from "../images/Avatar.png";
 import editAvatarSrc from "../images/edit-avatar-vector.svg";
 
-const avatarImage = document.getElementById("Avatar-image");
-avatarImage.src = avatarSrc;
-
-const editVector = document.getElementById("Avatar-edit-vector");
-editVector.src = editAvatarSrc;
-
 import FormValidator from "../components/FormValidator.js";
 
 import Card from "../components/Card.js";
@@ -22,6 +16,16 @@ import { initialCards, settings } from "../utils/constants.js";
 import Api from "../components/Api.js";
 import PopupWithConfirm from "../components/PopupWithConfirm.js";
 
+/////////////////////////////////////////////////////////////
+//       Elements      ////////////////////////////////////
+/////////////////////////////////////////////////////////
+
+//Elements: Profile Avatar//
+const avatarImage = document.getElementById("Avatar-image");
+const editVector = document.getElementById("Avatar-edit-vector");
+editVector.src = editAvatarSrc;
+avatarImage.src = avatarSrc;
+
 //Elements: Edit Profile Modal//
 const profileEditButton = document.querySelector(".profile__edit-button");
 const profileNameInput = document.querySelector("#profile-name-input");
@@ -30,30 +34,19 @@ const profileDescriptionInput = document.querySelector(
 );
 const profileEditForm = document.querySelector("#edit-profile-form");
 
-// Elements: Add Card Modal
+// Elements: Add Card Modal//
 const addNewCardButton = document.querySelector(".profile__add-button");
 const cardForm = document.querySelector("#add-card-form");
 
-//Elements: Image Preview Modal
+//Elements: Image Preview Modal//
 const imagePreviewModal = new PopupWithImage({
   popupSelector: "#image-preview-modal",
 });
 
-// Elements: Delete Card Preview Modal
-
-const deleteCardModal = new PopupWithConfirm({
-  popupSelector: "#delete-card-modal",
-  handleConfirm: () => {
-    if (currentCard) {
-      handleDeleteCard(currentCard);
-      deleteCardModal.close(); // Close modal after handling deletion
-    }
-  },
-});
-
+// Elements: Delete Card Preview Modal//
 let currentCard;
 
-//Elements: Form Validators
+//Elements: Form Validators//
 const editFormValidator = new FormValidator(settings, profileEditForm);
 editFormValidator.enableValidation();
 
@@ -62,12 +55,78 @@ addFormValidator.enableValidation();
 
 const toggleAddButtonState = () => addFormValidator.toggleButtonState();
 
-//Initialize Modals
+///////////////////////////////////////////////////////////////////////////
+//       Initialize Classses & Modals       //////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 
-// const editAvatarModal = new PopupWithForm({
-//   popupSelector: "#edit-avatar-modal",
-//   handleFormSubmit: () => {},
-// });
+// Initialize API //
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "c58369c4-dcd4-4208-8726-c10df21880b5",
+    "Content-Type": "application/json",
+  },
+});
+
+// Initialize User Info //
+const userInfo = new UserInfo({
+  nameSelector: ".profile__name",
+  jobSelector: ".profile__description",
+  avatarSelector: ".profile__avatar",
+});
+
+// Intialize Section //
+const section = new Section(
+  {
+    items: [],
+    renderer: (cardData) => {
+      section.addItem(cardData);
+    },
+  },
+  ".cards"
+);
+
+console.log("Section instance:", section);
+
+// Fetch and Render Initial Data//
+api
+  .getAllData()
+  .then(({ user, cards }) => {
+    console.log("Initial user data:", user);
+    console.log("Initial cards data:", cards);
+    const cardElement = cards.map((cardData) => createCard(cardData));
+    section.renderItems(cardElement);
+    userInfo.setUserInfo(user);
+    // if (cards.length === 0) {
+    //   console.log("No cards found on the server. Adding initial cards.");
+    //   addInitialCards(initialCards)
+    //     .then(() => api.getInitialCards())
+    //     .then((newCards) => {
+    //       console.log("New cards added from initial cards:", newCards);
+    //       section.renderItems(newCards);
+    //     });
+    // } else {
+    //   console.log("Rendering cards from the server:", cards);
+    //   section.renderItems(items);
+    // }
+  })
+  .catch((error) => console.error("Error loading data", error));
+
+const editAvatarModal = new PopupWithForm({
+  popupSelector: "#edit-avatar-modal",
+  handleFormSubmit: (data) => {
+    const userAvatar = {
+      avatar: data.avatar,
+    };
+    api
+      .updateUserAvatar(userAvatar)
+      .then((updatedUserInfo) => {
+        userInfo.setUserInfo(updatedUserInfo);
+        editAvatarModal.close();
+      })
+      .catch((error) => console.error("Error updating user avatar:", error));
+  },
+});
 
 const editProfileModal = new PopupWithForm({
   popupSelector: "#edit-profile-modal",
@@ -109,9 +168,7 @@ const addCardModal = new PopupWithForm({
           const cardElement = createCard({
             name: newCard.name,
             link: newCard.link,
-            //
             _id: newCard._id,
-            //
           });
           section.addItem(cardElement);
           cardForm.reset();
@@ -125,61 +182,15 @@ const addCardModal = new PopupWithForm({
   },
 });
 
-// Initialize User Info
-const userInfo = new UserInfo({
-  nameSelector: ".profile__name",
-  jobSelector: ".profile__description",
-  avatarSelector: ".profile__avatar",
-});
-
-// Intialize Section
-const section = new Section(
-  {
-    // items: initialCards,
-    items: [],
-    renderer: (cardData) => {
-      // const cardElement = createCard(cardData);
-      section.addItem(cardData);
-    },
-  },
-  ".cards"
-);
-
-console.log("Section instance:", section);
-// section.renderItems();
-
-// Initialize API
-const api = new Api({
-  baseUrl: "https://around-api.en.tripleten-services.com/v1",
-  headers: {
-    authorization: "c58369c4-dcd4-4208-8726-c10df21880b5",
-    "Content-Type": "application/json",
+const deleteCardModal = new PopupWithConfirm({
+  popupSelector: "#delete-card-modal",
+  handleConfirm: () => {
+    if (currentCard) {
+      handleDeleteCard(currentCard);
+      deleteCardModal.close(); // Close modal after handling deletion
+    }
   },
 });
-
-// Fetch and Render Initial Data
-api
-  .getAllData()
-  .then(({ user, cards }) => {
-    console.log("Initial user data:", user);
-    console.log("Initial cards data:", cards);
-    const cardElement = cards.map((cardData) => createCard(cardData));
-    section.renderItems(cardElement);
-    userInfo.setUserInfo(user);
-    // if (cards.length === 0) {
-    //   console.log("No cards found on the server. Adding initial cards.");
-    //   addInitialCards(initialCards)
-    //     .then(() => api.getInitialCards())
-    //     .then((newCards) => {
-    //       console.log("New cards added from initial cards:", newCards);
-    //       section.renderItems(newCards);
-    //     });
-    // } else {
-    //   console.log("Rendering cards from the server:", cards);
-    //   section.renderItems(items);
-    // }
-  })
-  .catch((error) => console.error("Error loading data", error));
 
 // function addInitialCards(cards) {
 //   const promises = cards.map((cardData) => {
@@ -206,12 +217,11 @@ api
 //   console.log("Checking promies:", promises);
 //   return Promise.all(promises);
 // }
-///
+console.log();
 
-///
-// Modal Event Listeners
-
-//
+///////////////////////////////////////////////////////////////////
+//       Event Handlers       /////////////////////////////////////
+///////////////////////////////////////////////////////////////////
 
 //Function: Render Card
 function createCard(cardData) {
@@ -219,7 +229,6 @@ function createCard(cardData) {
     cardData,
     "#card-template",
     () => handleImageClick(cardData.name, cardData.link),
-    // handleDeleteCard,
     () => handleDeleteClick(card),
     handleLikeClick
   );
@@ -230,22 +239,19 @@ function createCard(cardData) {
 
 // Function: Delete Card
 function handleDeleteCard(card) {
-  const cardId = card._id; // Assuming each card has an _id property
+  const cardId = card._id;
   api
     .deleteCard(cardId)
     .then(() => {
       card.removeCard();
-      // section.removeCard(cardId); // Remove card from the section
     })
     .catch((error) => console.error("Error deleting card:", error));
-  // .finally(() => {
-  //   deleteCardModal._resetButtonState();
-  // });
 }
-// Function to open delete confirmation
+
+// Function: Open delete confirmation
 function handleDeleteClick(card) {
-  currentCard = card; // Set the current card to delete
-  deleteCardModal.open(); // Open the confirmation modal
+  currentCard = card;
+  deleteCardModal.open();
 }
 
 // Function: Like/Dislike Card
@@ -257,16 +263,12 @@ function handleLikeClick(cardId, isLiked) {
   }
 }
 
-//Event Handlers//
+// Function: Open Preview Image
 function handleImageClick(name, link) {
   imagePreviewModal.open({ name, link });
 }
 
-// function handleConfirmCardDelete() {
-//   handleDeleteCard();
-//   deleteCardModal.close();
-// }
-
+// Functon: Open Profile Modal
 function handleProfileEditButton() {
   const userData = userInfo.getUserInfo();
   profileNameInput.value = userData.name;
@@ -274,12 +276,22 @@ function handleProfileEditButton() {
   editProfileModal.open();
 }
 
-//Event Listeners//
+//Function: Open Avatar-Edit Modal
+function handleAvatarEditButton() {
+  const avatarData = userInfo.getUserInfo();
+  avatarImage.value = avatarData.avatar;
+  editAvatarModal.open();
+}
+
+//////////////////////////////////////////////////////////
+//       Event Listeners       //////////////////////////
+////////////////////////////////////////////////////////
+
 editProfileModal.setEventListeners();
 addCardModal.setEventListeners();
 imagePreviewModal.setEventListeners();
+editAvatarModal.setEventListeners();
 
 profileEditButton.addEventListener("click", handleProfileEditButton);
 addNewCardButton.addEventListener("click", () => addCardModal.open());
-avatarImage.addEventListener("click", () => {});
-// confirmDeleteCardButton.addEventListener("click", handleConfirmCardDelete);
+avatarImage.addEventListener("click", handleAvatarEditButton);

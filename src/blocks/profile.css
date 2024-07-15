@@ -121,6 +121,10 @@
 }
 
 @media screen and (max-width: 916px) {
+  /* .profile__avatar-container {
+    padding: 0;
+  } */
+
   .profile__name {
     font-size: 22px;
     line-height: 27px;
@@ -153,6 +157,10 @@
     justify-content: center;
     align-items: center;
     padding: 42px 0 0 0;
+  }
+
+  .profile__avatar-container {
+    padding: 0;
   }
 
   .profile__avatar {

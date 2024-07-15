@@ -94,7 +94,9 @@ export default class Api {
     return fetch(`${this.baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this.headers,
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        avatar: data.avatar,
+      }),
     })
       .then(this._checkResponse)
       .catch((error) => console.error("Error updating user avatar:", error));
