@@ -1,25 +1,57 @@
 export default class Card {
-  constructor(data, cardSelector, handleImageClick) {
+  constructor(
+    data,
+    cardSelector,
+    handleImageClick,
+    handleDeleteClick,
+    handleLikeClick
+  ) {
+    this._id = data._id;
     this._name = data.name;
     this._link = data.link;
+    this._isLiked = data.isLiked;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
+    this._handleDeleteClick = handleDeleteClick;
+    this._handleLikeClick = handleLikeClick;
   }
 
   _setEventListeners() {
-    this._cardLikeButton.addEventListener("click", this._handleLikeButton);
-    this._cardDeleteButton.addEventListener("click", this._handleDeleteButton);
+    this._cardLikeButton.addEventListener(
+      "click",
+      this._handleLikeButton.bind(this)
+    );
+    this._cardDeleteButton.addEventListener(
+      "click",
+      this._handleDeleteButton.bind(this)
+    );
     this._cardImageElement.addEventListener("click", this._handleImageClick);
   }
 
-  _handleLikeButton = () => {
-    this._cardLikeButton.classList.toggle("card__like-button_active");
+  _handleLikeButton() {
+    this._handleLikeClick(this._id, this._isLiked)
+      .then(() => {
+        this._isLiked = !this._isLiked;
+        this._toggleLikeButton();
+      })
+      .catch((error) => console.error("Eror toggling like", error));
+  }
+
+  _toggleLikeButton = () => {
+    this._cardLikeButton.classList.toggle(
+      "card__like-button_active",
+      this._isLiked
+    );
   };
 
-  _handleDeleteButton = () => {
+  _handleDeleteButton() {
+    this._handleDeleteClick(this);
+  }
+
+  removeCard() {
     this._element.remove();
     this._element = null;
-  };
+  }
 
   _getTemplate() {
     return document
@@ -30,6 +62,9 @@ export default class Card {
 
   getView() {
     this._element = this._getTemplate();
+    //
+    // this._element.setAttribute("data-id", this._id); // Set data-id attribute
+    //
     this._cardImageElement = this._element.querySelector(".card__image");
     this._cardTextElement = this._element.querySelector(".card__text");
     this._cardLikeButton = this._element.querySelector(".card__like-button");
@@ -41,7 +76,7 @@ export default class Card {
     this._cardImageElement.alt = this._name;
     this._cardTextElement.textContent = this._name;
     this._setEventListeners();
-
+    this._toggleLikeButton();
     return this._element;
   }
 }

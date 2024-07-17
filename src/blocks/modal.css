@@ -46,6 +46,18 @@
   width: 358px;
 }
 
+.modal__container_delete-card {
+  padding: 34px 36px 36px 36px;
+  /* width: 358px; */
+  /* height: 111px; */
+}
+
+.modal__container_edit-avatar {
+  padding: 34px 36px 36px 36px;
+  /* width: 358px;
+  height: 111px; */
+}
+
 .modal__preview-container {
   position: relative;
   background-color: transparent;
@@ -131,12 +143,18 @@
   line-height: 22px;
   text-align: center;
   border: 2px #000;
-  padding: 14px 0 18px 0;
+  /* padding: 14px 0 18px 0; */
+  padding: 14px 0 14px 0;
   margin: 48px 0 0 0;
   color: #fff;
   background-color: #000;
   transition: opacity ease-in-out 0.2s 0.2s;
   cursor: pointer;
+}
+
+.modal__button_delete-card {
+  height: 50px;
+  margin: 38px 0 0 0;
 }
 
 .modal__button:hover:not(:disabled) {
@@ -164,7 +182,6 @@
 
   .modal__container {
     padding: 25px 22px;
-    width: 282px;
   }
 
   .modal__close {
@@ -194,5 +211,9 @@
     font-size: 14px;
     line-height: 17px;
     margin: 45px 0 0 0;
+  }
+
+  .modal__button_delete-card {
+    margin: 38px 0 0 0;
   }
 }
