@@ -9,7 +9,7 @@ export default class Popup {
     this._popupElement.classList.add("modal_opened");
     document.addEventListener("keydown", this._handleEscClose);
     document.addEventListener("mousedown", this._handleClickOutsideModal);
-    this.resetButtonText(".modal__button");
+    // this.resetButtonText(".modal__button");
   }
 
   close() {

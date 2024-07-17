@@ -19,4 +19,9 @@ export default class PopupWithConfirmation extends Popup {
       this.close();
     });
   }
+
+  open() {
+    super.open();
+    this.resetButtonText(".modal__button");
+  }
 }
