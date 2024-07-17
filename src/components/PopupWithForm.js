@@ -9,7 +9,19 @@ export default class PopupWithForm extends Popup {
     this._confirmButton = this._popupElement.querySelector(
       ".modal__button_confirm-form"
     );
+    //
+    // this._submitBtnText = this._submitBtn.textContent;
+    this._submitBtnText = this._confirmButton.textContent;
   }
+  ////
+  renderLoading(isLoading, loadingText = "Saving...") {
+    if (isLoading) {
+      this._submitBtn.textContent = loadingText;
+    } else {
+      this._submitBtn.textContent = this._submitBtnText;
+    }
+  }
+  /////
 
   _getInputValues() {
     this._inputValues = {};
@@ -28,6 +40,7 @@ export default class PopupWithForm extends Popup {
       this.close();
     });
   }
+  //
 
   close() {
     super.close();
