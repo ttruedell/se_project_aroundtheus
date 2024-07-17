@@ -7,8 +7,6 @@
     <meta name="description" content="" />
     <meta name="author" content="Tyson Truedell" />
     <meta name="keywords" content="" />
-    <link rel="stylesheet" href="./pages/index.css" />
-    <!-- <link rel="favicon" type="image/x-icon" href="./favicon.ico" /> -->
   </head>
   <body>
     <div class="page">
@@ -19,7 +17,14 @@
       </header>
       <main class="content">
         <section class="profile">
-          <img class="profile__avatar" id="Avatar-image" alt="avatar-image" />
+          <div class="profile__avatar-container">
+            <img class="profile__avatar" id="Avatar-image" alt="avatar-image" />
+            <img
+              class="profile__vector"
+              id="Avatar-edit-vector"
+              alt="avatar-edit-vector"
+            />
+          </div>
           <div class="profile__info">
             <h1 class="profile__name">Jacques Cousteau</h1>
             <button class="profile__edit-button" type="button"></button>
@@ -61,7 +66,7 @@
             class="modal__input modal__input_type_description"
             id="profile-description-input"
             type="text"
-            name="job"
+            name="about"
             placeholder="Description"
             required
             minlength="2"
@@ -73,7 +78,7 @@
           ></span>
           <button
             type="submit"
-            class="modal__button modal__button_disabled"
+            class="modal__button modal__button_confirm-form modal__button_disabled"
             disabled
           >
             Save
@@ -118,7 +123,7 @@
           ></span>
           <button
             type="submit"
-            class="modal__button modal__button_disabled"
+            class="modal__button modal__button_confirm-form modal__button_disabled"
             disabled
           >
             Create
@@ -126,6 +131,57 @@
         </form>
       </div>
     </div>
+
+    <!--  Edit Avatar Modal -->
+    <div class="modal" id="edit-avatar-modal">
+      <div
+        class="modal__container modal__container_edit-avatar modal__js-container"
+        id="modal-container-avatar"
+      >
+        <button class="modal__close"></button>
+        <p class="modal__heading">Change profile picture</p>
+        <form class="modal__form" id="edit-avatar-form">
+          <input
+            class="modal__input modal__input_type_url"
+            id="avatar-url-input"
+            type="url"
+            name="avatar"
+            placeholder="Image URL"
+            required
+          />
+          <span
+            class="modal__error modal__error_visible"
+            id="avatar-url-input-error"
+          ></span>
+          <button
+            type="submit"
+            class="modal__button modal__button_confirm-form"
+          >
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!--  Delete Card Modal -->
+    <div class="modal" id="delete-card-modal">
+      <div
+        class="modal__container modal__container_delete-card modal__js-container"
+        id="modal-container-card"
+      >
+        <button class="modal__close"></button>
+        <p class="modal__heading">Are you sure?</p>
+        <form
+          class="modal__form modal__form_delete-confirm"
+          id="delete-card-form"
+        >
+          <button type="submit" class="modal__button modal__button_delete-card">
+            Yes
+          </button>
+        </form>
+      </div>
+    </div>
+
     <!-- Image Preview Modal-->
     <div class="modal" id="image-preview-modal">
       <div
