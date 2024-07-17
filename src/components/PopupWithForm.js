@@ -10,15 +10,16 @@ export default class PopupWithForm extends Popup {
       ".modal__button_confirm-form"
     );
     //
-    // this._submitBtnText = this._submitBtn.textContent;
     this._submitBtnText = this._confirmButton.textContent;
   }
+
   ////
   renderLoading(isLoading, loadingText = "Saving...") {
     if (isLoading) {
-      this._submitBtn.textContent = loadingText;
-    } else {
-      this._submitBtn.textContent = this._submitBtnText;
+      this._confirmButton.textContent = loadingText;
+    } 
+    else {
+      this._confirmButton.textContent = this._submitBtnText;
     }
   }
   /////
@@ -36,7 +37,7 @@ export default class PopupWithForm extends Popup {
     this._form.addEventListener("submit", (event) => {
       event.preventDefault();
       this._handleFormSubmit(this._getInputValues());
-      this.setButtonText(".modal__button_confirm-form", "Saving...");
+      // this.setButtonText(".modal__button_confirm-form", "Saving...");
       this.close();
     });
   }
@@ -49,6 +50,6 @@ export default class PopupWithForm extends Popup {
 
   open() {
     super.open();
-    this.resetButtonText(".modal__button");
+    // this.resetButtonText(".modal__button");
   }
 }

@@ -138,13 +138,17 @@ const editProfileModal = new PopupWithForm({
       name: data.name,
       about: data.about,
     };
+    editProfileModal.renderLoading(true);
     api
       .updateUserInfo(userData)
       .then((updatedUserInfo) => {
         userInfo.setUserInfo(updatedUserInfo);
         editProfileModal.close();
       })
-      .catch((error) => console.error("Error updating user info:", error));
+      .catch((error) => console.error("Error updating user info:", error))
+      .finally(() => {
+        editProfileModal.renderLoading(false);
+      });
   },
 });
 
@@ -161,6 +165,8 @@ const addCardModal = new PopupWithForm({
       name: data.title,
       link: data.url,
     };
+
+    addCardModal.renderLoading(true);
     api
       .addCard(cardData)
       .then((newCard) => {
@@ -178,7 +184,10 @@ const addCardModal = new PopupWithForm({
           console.error("Invalid card data:", newCard);
         }
       })
-      .catch((error) => console.error("Error adding new card:", error));
+      .catch((error) => console.error("Error adding new card:", error))
+      .finally(() => {
+        addCardModal.renderLoading(false);
+      });
   },
 });
 
@@ -187,7 +196,7 @@ const deleteCardModal = new PopupWithConfirm({
   handleConfirm: () => {
     if (currentCard) {
       handleDeleteCard(currentCard);
-      deleteCardModal.close(); // Close modal after handling deletion
+      deleteCardModal.close();
     }
   },
 });

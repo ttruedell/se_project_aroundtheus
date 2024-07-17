@@ -60,23 +60,4 @@ export default class Popup {
     const closeButton = this._popupElement.querySelector(".modal__close");
     closeButton.addEventListener("click", () => this.close());
   }
-
-  //
-  //
-  setButtonText(buttonSelector, newText) {
-    const button = this._popupElement.querySelector(buttonSelector);
-    if (button) {
-      this._defaultButtonText = button.textContent;
-      button.textContent = newText;
-    }
-  }
-
-  resetButtonText(buttonSelector) {
-    const button = this._popupElement.querySelector(buttonSelector);
-    if (button && this._defaultButtonText) {
-      button.textContent = this._defaultButtonText;
-    }
-  }
-  //
-  //
 }
