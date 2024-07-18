@@ -18,6 +18,7 @@
   height: 120px;
   width: 120px;
   /* padding-right: 30px; */
+  border-radius: 50%;
   grid-area: avatar;
   transition: opacity ease-in-out 0.15s 0.15s;
 }
