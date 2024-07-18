@@ -80,7 +80,10 @@ const section = new Section(
   {
     items: [],
     renderer: (cardData) => {
-      section.addItem(cardData);
+      //
+      const cardElement = createCard(cardData);
+      //
+      section.addItem(cardElement);
     },
   },
   ".cards"
@@ -94,21 +97,8 @@ api
   .then(({ user, cards }) => {
     console.log("Initial user data:", user);
     console.log("Initial cards data:", cards);
-    const cardElement = cards.map((cardData) => createCard(cardData));
-    section.renderItems(cardElement);
+    section.renderItems(cards);
     userInfo.setUserInfo(user);
-    // if (cards.length === 0) {
-    //   console.log("No cards found on the server. Adding initial cards.");
-    //   addInitialCards(initialCards)
-    //     .then(() => api.getInitialCards())
-    //     .then((newCards) => {
-    //       console.log("New cards added from initial cards:", newCards);
-    //       section.renderItems(newCards);
-    //     });
-    // } else {
-    //   console.log("Rendering cards from the server:", cards);
-    //   section.renderItems(items);
-    // }
   })
   .catch((error) => console.error("Error loading data", error));
 
@@ -130,9 +120,6 @@ const editAvatarModal = new PopupWithForm({
 
 const editProfileModal = new PopupWithForm({
   popupSelector: "#edit-profile-modal",
-  // handleFormSubmit: (data) => {
-  //   userInfo.setUserInfo({ name: data.name, job: data.job });
-  // },
   handleFormSubmit: (data) => {
     const userData = {
       name: data.name,
@@ -154,12 +141,6 @@ const editProfileModal = new PopupWithForm({
 
 const addCardModal = new PopupWithForm({
   popupSelector: "#add-card-modal",
-  // handleFormSubmit: (data) => {
-  //   const cardElement = createCard({ name: data.title, link: data.url });
-  //   section.addItem(cardElement);
-  //   cardForm.reset();
-  //   toggleAddButtonState();
-  // },
   handleFormSubmit: (data) => {
     const cardData = {
       name: data.title,
@@ -171,11 +152,14 @@ const addCardModal = new PopupWithForm({
       .addCard(cardData)
       .then((newCard) => {
         if (newCard && newCard.name && newCard.link) {
-          const cardElement = createCard({
-            name: newCard.name,
-            link: newCard.link,
-            _id: newCard._id,
-          });
+          const cardElement = createCard(
+            //   {
+            //   name: newCard.name,
+            //   link: newCard.link,
+            //   _id: newCard._id,
+            // }
+            newCard
+          );
           section.addItem(cardElement);
           cardForm.reset();
           toggleAddButtonState();
@@ -200,33 +184,6 @@ const deleteCardModal = new PopupWithConfirm({
     }
   },
 });
-
-// function addInitialCards(cards) {
-//   const promises = cards.map((cardData) => {
-//     console.log("Adding card:", cardData);
-//     return api
-//       .addCard(cardData)
-//       .then((newCard) => {
-//         console.log("Adding card:", cardData);
-//         // if (newCard && newCard.name && newCard.link) {
-//         const cardElement = createCard({
-//           name: newCard.name,
-//           link: newCard.link,
-//           //
-//           _id: newCard._id,
-//           //
-//         });
-//         section.addItem(cardElement);
-//         // } else {
-//         //   console.error("Invalid card data:", newCard);
-//         // }
-//       })
-//       .catch((error) => console.error("Error adding card:", error));
-//   });
-//   console.log("Checking promies:", promises);
-//   return Promise.all(promises);
-// }
-console.log();
 
 ///////////////////////////////////////////////////////////////////
 //       Event Handlers       /////////////////////////////////////
