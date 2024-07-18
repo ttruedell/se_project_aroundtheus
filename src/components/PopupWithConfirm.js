@@ -12,21 +12,12 @@ export default class PopupWithConfirmation extends Popup {
   }
 
   ///
-  setButtonText(buttonSelector, newText) {
-    const button = this._popupElement.querySelector(buttonSelector);
-    if (button) {
-      if (!this._defaultButtonText) {
-        this._defaultButtonText = button.textContent;
-      }
-      button.textContent = newText;
-    }
+  setButtonText(newText) {
+    this._confirmButton.textContent = newText;
   }
 
-  resetButtonText(buttonSelector) {
-    const button = this._popupElement.querySelector(buttonSelector);
-    if (button && this._defaultButtonText) {
-      button.textContent = this._defaultButtonText;
-    }
+  resetButtonText(/*buttonSelector*/) {
+    this._confirmButton.textContent = this._defaultButtonText;
   }
   ///
 
@@ -34,13 +25,22 @@ export default class PopupWithConfirmation extends Popup {
     super.setEventListeners();
     this._confirmButton.addEventListener("click", (event) => {
       event.preventDefault();
-      this.setButtonText(".modal__button_delete-card", "Saving...");
-      this._handleConfirm();
+      this.setButtonText("Saving...");
+      this._handleConfirm()
+        .then(() => {
+          this.close();
+        })
+        .catch((error) => {
+          console.error("Error during confirmation:", error);
+        })
+        .finally(() => {
+          this.resetButtonText();
+        });
     });
   }
 
   open() {
     super.open();
-    this.resetButtonText(".modal__button");
+    this.resetButtonText();
   }
 }

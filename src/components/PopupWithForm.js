@@ -17,8 +17,7 @@ export default class PopupWithForm extends Popup {
   renderLoading(isLoading, loadingText = "Saving...") {
     if (isLoading) {
       this._confirmButton.textContent = loadingText;
-    } 
-    else {
+    } else {
       this._confirmButton.textContent = this._submitBtnText;
     }
   }
@@ -36,9 +35,15 @@ export default class PopupWithForm extends Popup {
     super.setEventListeners();
     this._form.addEventListener("submit", (event) => {
       event.preventDefault();
-      this._handleFormSubmit(this._getInputValues());
-      // this.setButtonText(".modal__button_confirm-form", "Saving...");
-      this.close();
+      this._handleFormSubmit(this._getInputValues())
+        // this.setButtonText(".modal__button_confirm-form", "Saving...");
+        // this.close();
+        .then(() => {
+          this.close();
+        })
+        .catch((error) => {
+          console.error("Error during confirmation:", error);
+        });
     });
   }
   //
