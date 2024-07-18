@@ -48,6 +48,15 @@ export default class PopupWithForm extends Popup {
   }
   //
 
+  _isValidForm() {
+    const inputValues = this._getInputValues();
+    if (!inputValues.avatar) {
+      console.error("Avatar is required.");
+      return false;
+    }
+    return true;
+  }
+
   close() {
     super.close();
     this._form.reset();
