@@ -26,16 +26,22 @@ export default class PopupWithConfirmation extends Popup {
     this._confirmButton.addEventListener("click", (event) => {
       event.preventDefault();
       this.setButtonText("Saving...");
-      this._handleConfirm()
-        .then(() => {
-          this.close();
-        })
-        .catch((error) => {
-          console.error("Error during confirmation:", error);
-        })
-        .finally(() => {
-          this.resetButtonText();
-        });
+      this._handleConfirm();
+      const result = this._handleConfirm;
+      if (result instanceof Promise) {
+        result
+          .then(() => {
+            this.close();
+          })
+          .catch((error) => {
+            console.error("Error during confirmation:", error);
+          })
+          .finally(() => {
+            this.resetButtonText();
+          });
+      } else {
+        this.close();
+      }
     });
   }
 

@@ -35,13 +35,19 @@ export default class PopupWithForm extends Popup {
     super.setEventListeners();
     this._form.addEventListener("submit", (event) => {
       event.preventDefault();
-      this._handleFormSubmit(this._getInputValues())
-        .then(() => {
-          this.close();
-        })
-        .catch((error) => {
-          console.error("Error during confirmation:", error);
-        });
+      this._handleFormSubmit(this._getInputValues());
+      const result = this._handleFormSubmit(this._getInputValues());
+      if (result instanceof Promise) {
+        result
+          .then(() => {
+            this.close();
+          })
+          .catch((error) => {
+            console.error("Error during confirmation:", error);
+          });
+      } else {
+        this.close();
+      }
     });
   }
   //
@@ -59,6 +65,4 @@ export default class PopupWithForm extends Popup {
     super.close();
     this._form.reset();
   }
-
-  
 }
