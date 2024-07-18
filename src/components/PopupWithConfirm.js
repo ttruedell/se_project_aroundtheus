@@ -16,7 +16,7 @@ export default class PopupWithConfirmation extends Popup {
     this._confirmButton.textContent = newText;
   }
 
-  resetButtonText(/*buttonSelector*/) {
+  resetButtonText() {
     this._confirmButton.textContent = this._defaultButtonText;
   }
   ///

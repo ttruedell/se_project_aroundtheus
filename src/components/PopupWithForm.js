@@ -36,8 +36,6 @@ export default class PopupWithForm extends Popup {
     this._form.addEventListener("submit", (event) => {
       event.preventDefault();
       this._handleFormSubmit(this._getInputValues())
-        // this.setButtonText(".modal__button_confirm-form", "Saving...");
-        // this.close();
         .then(() => {
           this.close();
         })
@@ -62,8 +60,5 @@ export default class PopupWithForm extends Popup {
     this._form.reset();
   }
 
-  open() {
-    super.open();
-    // this.resetButtonText(".modal__button");
-  }
+  
 }
