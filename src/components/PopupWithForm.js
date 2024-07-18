@@ -6,19 +6,19 @@ export default class PopupWithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit;
     this._form = this._popupElement.querySelector(".modal__form");
     this._inputList = this._form.querySelectorAll(".modal__input");
-    this._confirmButton = this._popupElement.querySelector(
+    this._submitButton = this._popupElement.querySelector(
       ".modal__button_confirm-form"
     );
     //
-    this._submitBtnText = this._confirmButton.textContent;
+    this._submitBtnText = this._submitButton.textContent;
   }
 
   ////
   renderLoading(isLoading, loadingText = "Saving...") {
     if (isLoading) {
-      this._confirmButton.textContent = loadingText;
+      this._submitButton.textContent = loadingText;
     } else {
-      this._confirmButton.textContent = this._submitBtnText;
+      this._submitButton.textContent = this._submitBtnText;
     }
   }
   /////
