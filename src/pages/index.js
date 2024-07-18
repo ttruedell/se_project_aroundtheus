@@ -26,6 +26,9 @@ const editVector = document.getElementById("Avatar-edit-vector");
 editVector.src = editAvatarSrc;
 avatarImage.src = avatarSrc;
 
+//Elements: Edit Avatar Modal//
+const avatarForm = document.querySelector("#edit-avatar-form");
+
 //Elements: Edit Profile Modal//
 const profileEditButton = document.querySelector(".profile__edit-button");
 const profileNameInput = document.querySelector("#profile-name-input");
@@ -52,6 +55,9 @@ editFormValidator.enableValidation();
 
 const addFormValidator = new FormValidator(settings, cardForm);
 addFormValidator.enableValidation();
+
+const avatarFormValidator = new FormValidator(settings, avatarForm);
+avatarFormValidator.enableValidation();
 
 const toggleAddButtonState = () => addFormValidator.toggleButtonState();
 
