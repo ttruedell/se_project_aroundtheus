@@ -26,7 +26,7 @@ export default class PopupWithConfirmation extends Popup {
     this._confirmButton.addEventListener("click", (event) => {
       event.preventDefault();
       this.setButtonText("Deleting...");
-      this._handleConfirm();
+      // this._handleConfirm();
       const result = this._handleConfirm();
       if (result instanceof Promise) {
         result
