@@ -35,31 +35,9 @@ export default class PopupWithForm extends Popup {
     super.setEventListeners();
     this._form.addEventListener("submit", (event) => {
       event.preventDefault();
-      // this._handleFormSubmit(this._getInputValues());
-      const result = this._handleFormSubmit(this._getInputValues());
-      if (result instanceof Promise) {
-        result
-          .then(() => {
-            this.close();
-          })
-          .catch((error) => {
-            console.error("Error during confirmation:", error);
-          });
-      } else {
-        this.close();
-      }
+      this._handleFormSubmit(this._getInputValues());
     });
   }
-  //
-
-  // _isValidForm() {
-  //   const inputValues = this._getInputValues();
-  //   if (!inputValues.avatar) {
-  //     console.error("Avatar is required.");
-  //     return false;
-  //   }
-  //   return true;
-  // }
 
   close() {
     super.close();

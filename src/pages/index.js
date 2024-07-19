@@ -114,6 +114,7 @@ const editAvatarModal = new PopupWithForm({
     const userAvatar = {
       avatar: data.avatar,
     };
+    editAvatarModal.renderLoading(true);
     api
       .updateUserAvatar(userAvatar)
       .then((updatedUserInfo) => {
@@ -121,7 +122,10 @@ const editAvatarModal = new PopupWithForm({
         editAvatarModal.close();
         avatarFormValidator.toggleButtonState();
       })
-      .catch((error) => console.error("Error updating user avatar:", error));
+      .catch((error) => console.error("Error updating user avatar:", error))
+      .finally(() => {
+        editAvatarModal.renderLoading(false);
+      });
   },
 });
 
