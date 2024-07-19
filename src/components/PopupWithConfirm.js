@@ -47,6 +47,6 @@ export default class PopupWithConfirmation extends Popup {
 
   open() {
     super.open();
-    this.resetButtonText();
+    // this.resetButtonText();
   }
 }
