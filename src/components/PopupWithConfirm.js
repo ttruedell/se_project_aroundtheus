@@ -41,12 +41,12 @@ export default class PopupWithConfirmation extends Popup {
           });
       } else {
         this.close();
+        this.resetButtonText();
       }
     });
   }
 
   open() {
     super.open();
-    this.resetButtonText();
   }
 }
