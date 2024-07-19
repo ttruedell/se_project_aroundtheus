@@ -44,12 +44,6 @@ export default class PopupWithConfirmation extends Popup {
             console.log("Finally block: Resetting button text");
             this.resetButtonText();
           });
-      } else {
-        console.log(
-          "Synchronous action: Closing modal and resetting button text"
-        );
-        this.close();
-        this.resetButtonText();
       }
     });
   }
