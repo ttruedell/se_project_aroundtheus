@@ -103,8 +103,8 @@ api
   .then(({ user, cards }) => {
     console.log("Initial user data:", user);
     console.log("Initial cards data:", cards);
-    section.renderItems(cards);
     userInfo.setUserInfo(user);
+    section.renderItems(cards);
   })
   .catch((error) => console.error("Error loading data", error));
 
@@ -157,22 +157,11 @@ const addCardModal = new PopupWithForm({
     api
       .addCard(cardData)
       .then((newCard) => {
-        if (newCard && newCard.name && newCard.link) {
-          const cardElement = createCard(
-            //   {
-            //   name: newCard.name,
-            //   link: newCard.link,
-            //   _id: newCard._id,
-            // }
-            newCard
-          );
-          section.addItem(cardElement);
-          cardForm.reset();
-          toggleAddButtonState();
-          addCardModal.close();
-        } else {
-          console.error("Invalid card data:", newCard);
-        }
+        const cardElement = createCard(newCard);
+        section.addItem(cardElement);
+        cardForm.reset();
+        toggleAddButtonState();
+        addCardModal.close();
       })
       .catch((error) => console.error("Error adding new card:", error))
       .finally(() => {
