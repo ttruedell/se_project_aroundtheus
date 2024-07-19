@@ -119,6 +119,7 @@ const editAvatarModal = new PopupWithForm({
       .then((updatedUserInfo) => {
         userInfo.setUserInfo(updatedUserInfo);
         editAvatarModal.close();
+        avatarFormValidator.toggleButtonState();
       })
       .catch((error) => console.error("Error updating user avatar:", error));
   },
