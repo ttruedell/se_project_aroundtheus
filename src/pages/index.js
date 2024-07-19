@@ -173,10 +173,12 @@ const addCardModal = new PopupWithForm({
 const deleteCardModal = new PopupWithConfirm({
   popupSelector: "#delete-card-modal",
   handleConfirm: () => {
+    console.log("Current card in handleConfirm:", currentCard);
     if (currentCard) {
-      handleDeleteCard(currentCard);
-      deleteCardModal.close();
+      return handleDeleteCard(currentCard);
     }
+    // console.warn("No card to delete");
+    return Promise.resolve();
   },
 });
 
@@ -201,7 +203,7 @@ function createCard(cardData) {
 // Function: Delete Card
 function handleDeleteCard(card) {
   const cardId = card._id;
-  api
+  return api
     .deleteCard(cardId)
     .then(() => {
       card.removeCard();
@@ -251,6 +253,7 @@ function handleAvatarEditButton() {
 editProfileModal.setEventListeners();
 addCardModal.setEventListeners();
 imagePreviewModal.setEventListeners();
+deleteCardModal.setEventListeners();
 editAvatarModal.setEventListeners();
 
 profileEditButton.addEventListener("click", handleProfileEditButton);
